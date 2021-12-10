@@ -14,10 +14,10 @@
 }
 
 .toy-name {
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 1.5rem;
   text-align: center;
   margin: 0.5rem;
+  height: 2.5rem;
 }
 
 .toy-image{
@@ -26,7 +26,18 @@
 }
 
 .toy-text{
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1.1rem;
   margin-top: 0.4rem;
+}
+
+.imageFavourite{
+  width: 20%;
+  height: 15%;
+  background-image: url("./assets/png/snow.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
 }
