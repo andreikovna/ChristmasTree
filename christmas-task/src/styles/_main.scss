@@ -1,0 +1,78 @@
+$dark-green: #192f2d;
+
+.main {
+  height: 90vh;
+  width: 100%;
+  background-image: url("./assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.title {
+  margin-top: 6rem;
+  width: 593px;
+  padding: 66px 0;
+  font-family: Neucha;
+  font-size: 53px;
+  line-height: 58px;
+  text-align: center;
+  align-items: center;
+  text-transform: uppercase;
+  background: radial-gradient(
+    118.88% 606.86% at 0% 0%,
+    rgba(36, 197, 219, 0.15) 0%,
+    rgba(36, 197, 219, 0) 100%
+  );
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  border: 2px solid #3ddfd1;
+}
+
+.button-start {
+  width: 320px;
+  height: 54px;
+  background: radial-gradient(
+    118.88% 606.86% at 0% 0%,
+    rgba(36, 197, 219, 0.15) 0%,
+    rgba(36, 197, 219, 0) 100%
+  );
+  backdrop-filter: blur(31px);
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: Neucha;
+  font-size: 24px;
+  line-height: 29px;
+  color: white;
+  border: 2px solid #3ddfd1;
+  margin-top: 2rem;
+}
+
+.footer {
+  height: 10vh;
+  background-color: $dark-green;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & p {
+    color: #3ddfd1;
+  }
+  & a {
+    font-size: 18px;
+    line-height: 20px;
+    color: white;
+    text-decoration: none;
+    margin: 1rem;
+    & .RSSlogo {
+      width: 6rem;
+      margin: 1rem;
+    }
+  }
+}
