@@ -57,10 +57,17 @@ module.exports = ({ development } : { development: boolean }) => ({
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new CopyPlugin({
-      patterns: [{
-        from: 'public',
-        noErrorOnMissing: true,
-      }],
+      patterns: [
+        {
+          from: '**/*',
+          context: path.resolve(__dirname, 'src'),
+          globOptions: {
+            ignore: ['**/*.js', '**/*.ts', '**/*.scss', '**/*.sass', '**/*.html'],
+          },
+          noErrorOnMissing: true,
+          force: true,
+        },
+      ],
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
   ],
