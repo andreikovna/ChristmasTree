@@ -23,7 +23,7 @@ export class ChristmasDecorationItem {
     shape: string,
     color: string,
     size: string,
-    favourite: boolean
+    favourite: boolean,
   ) {
     this.num = num;
     this.name = name;
@@ -59,10 +59,7 @@ export class ChristmasDecorationItem {
     const imageFavourite = document.createElement('div');
     imageFavourite.classList.add('imageFavourite');
     imageFavourite.setAttribute('data-number', this.num);
-    imageFavourite.addEventListener(
-      'click',
-      ChristmasDecorationItem.addToFavourite
-    );
+    imageFavourite.addEventListener('click', ChristmasDecorationItem.addToFavourite);
 
     div.append(favourite);
     div.append(imageFavourite);
