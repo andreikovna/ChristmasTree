@@ -86,3 +86,47 @@
 .bird-toy{
   background-image: url('./assets/shape/bird_toy.png');
 }
+
+.filter_color{
+display: flex;
+margin: 1rem 0;
+}
+
+.color{
+width: 25px;
+height: 25px;
+border-radius: 5px;
+margin-right: 1rem;
+}
+
+.white{
+  background-color: white;
+}
+
+.yellow{
+  background-color: yellow;
+}
+
+.red{
+  background-color: red;
+}
+
+.blue{
+  background-color: blue;
+}
+
+.green{
+  background-color: green;
+}
+
+.filter_size {
+  margin: 1rem 0;
+  & label{
+    margin-right: 1.2rem;
+  }
+}
+
+.favourite-toys{
+  text-transform: uppercase;
+  margin: 2.5rem 0;
+}
