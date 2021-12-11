@@ -15,6 +15,10 @@ export class ChristmasDecorationItem {
 
   favourite: boolean;
 
+  chosenItems: string[];
+
+  maxNumberOfChosen: number;
+
   constructor(
     num: string,
     name: string,
@@ -33,6 +37,8 @@ export class ChristmasDecorationItem {
     this.color = color;
     this.size = size;
     this.favourite = favourite;
+    this.chosenItems = new Array(0);
+    this.maxNumberOfChosen = 20;
   }
 
   createElement(): HTMLDivElement {
@@ -59,21 +65,26 @@ export class ChristmasDecorationItem {
     const imageFavourite = document.createElement('div');
     imageFavourite.classList.add('imageFavourite');
     imageFavourite.setAttribute('data-number', this.num);
-    imageFavourite.addEventListener('click', ChristmasDecorationItem.addToFavourite);
+    imageFavourite.addEventListener('click', this.addToFavourite);
 
     div.append(favourite);
     div.append(imageFavourite);
     return div;
   }
 
-  static addToFavourite(event: Event): void {
+  addToFavourite(event: Event): void {
     const allSnowflakes = document.querySelectorAll('.imageFavourite');
-    const target = event.target as HTMLDivElement & {
+    const target = event.target as HTMLElement & {
       dataset: Record<string, string>;
     };
     if (target.dataset) {
-      const chosen = allSnowflakes[Number(target.dataset.number) - 1] as HTMLDivElement;
+      const chosen = allSnowflakes[Number(target.dataset.number) - 1] as HTMLElement;
       chosen.style.backgroundImage = 'url("./assets/png/snow_chosen.png")';
     }
+    this.checkMaxFavourite();
+  }
+
+  checkMaxFavourite() :void {
+    console.log(this.chosenItems);
   }
 }

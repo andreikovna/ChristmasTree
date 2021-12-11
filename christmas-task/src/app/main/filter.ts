@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="../public/favicon.ico"
-      type="image/x-icon"
-    />
-    <title>Christmas tree</title>
-  </head>
-  <body>
+export class Filter{
+  static createFilter(): HTMLDivElement {
+    const filterContainer = document.createElement('div');
+    filterContainer.classList.add('filter_item_container');
+    filterContainer.innerHTML = `
     <p class="filter_titles">Форма</p>
     <div class="filter_shape">
       <div class="shape_container">
@@ -51,5 +42,6 @@
       <input type="checkbox" id="favourite-toys" name="favourite-toys" />
       <label for="favourite-toys">Только любимые</label>
     </div>
-  </body>
-</html>
+    `;
+    return filterContainer;
+}
