@@ -42,6 +42,7 @@
   display: flex;
   justify-content: space-between;
   margin: 1rem 0;
+  margin-bottom: 3rem;
 }
 
 .shape_container{
@@ -90,6 +91,7 @@
 .filter_color{
 display: flex;
 margin: 1rem 0;
+margin-bottom: 3rem;
 }
 
 .color{
@@ -129,4 +131,29 @@ margin-right: 1rem;
 .favourite-toys{
   text-transform: uppercase;
   margin: 2.5rem 0;
+}
+
+.container{
+  position: relative;
+  pointer-events: none;
+}
+
+.container input[type="range"]{
+  height: 2em;
+  display: block;
+  margin: 0;
+}
+
+.container input[type="range"]:last-child{
+  margin-top: -2em;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+}
+input[type="range"]::-moz-range-thumb {
+  pointer-events: all;
+}
+input[type="range"]::-ms-thumb {
+  pointer-events: all;
 }

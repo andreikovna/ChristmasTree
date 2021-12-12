@@ -2,6 +2,8 @@
 @import './styles/_decorations.scss';
 @import './styles/christmasDecorationItem';
 @import './styles/filtersContainer';
+@import './styles/slider';
+@import './styles/sliderCustom';
 
 /* normalize */
 *,
@@ -63,6 +65,7 @@ html {
 body {
   color: white;
   font-family: Neucha;
+  background-color: $dark-green;
 }
 
 @font-face {

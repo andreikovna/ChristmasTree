@@ -84,7 +84,7 @@ export class ChristmasDecorationItem {
     this.checkMaxFavourite();
   }
 
-  checkMaxFavourite() :void {
-    console.log(this.chosenItems);
+  checkMaxFavourite() : string[] {
+    return this.chosenItems;
   }
 }

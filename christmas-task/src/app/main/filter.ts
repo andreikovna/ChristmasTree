@@ -28,10 +28,18 @@ export class Filter {
     </div>
 
     <p class="filter_titles">Количество экземпляров</p>
-    <div class="filter_quantity"></div>
+    <div class="filter_quantity">
+      <input type="number" class="min-quantity" value="1" readonly>
+      <div id="slider-quantity" class="slider-quantity"></div>
+      <input type="number" class="max-quantity" value="12" readonly>
+    </div>
 
     <p class="filter_titles">Год приобретения</p>
-    <div class="filter_year"></div>
+    <div class="filter_year">
+      <input type="number" class="min-year" value="1940" readonly>
+      <div id="slider-year" class="slider-year"></div>
+      <input type="number" class="max-year" value="2020" readonly>
+    </div>
 
     <p class="filter_titles">Цвет</p>
     <div class="filter_color">

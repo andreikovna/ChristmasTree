@@ -1,5 +1,7 @@
 import img from '../../assets/png/rs_school_js.png';
 import { Decorations } from './decorations';
+import { quantitySlider } from './slider-quantity';
+import { yearSlider } from './slider-year';
 
 export class MainPage {
   private container: HTMLElement;
@@ -62,6 +64,8 @@ export class MainPage {
     document.body.innerHTML = '';
     const decorationsPage = decorations.render();
     document.body.append(decorationsPage);
+    quantitySlider();
+    yearSlider();
   }
 
   render(): HTMLElement {
