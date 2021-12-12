@@ -19,6 +19,20 @@ export class MainPage {
     this.container.id = id;
   }
 
+  static createHeader(): HTMLDivElement {
+    const div = document.createElement('div');
+    div.classList.add('header');
+    div.innerHTML = `
+    <div class="header">
+    <nav class="nav-bar">
+      <div class="logo"></div>
+      <div class="switch toy-page">Игрушки</div>
+      <div class="switch tree-page">Ёлка</div>
+    </nav>
+  </div>`;
+    return div;
+  }
+
   static createTitle(text: string): HTMLElement {
     const title = document.createElement('div');
     title.classList.add('title');

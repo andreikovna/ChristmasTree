@@ -12,6 +12,23 @@ export class Decorations {
     this.container.id = id;
   }
 
+  static createHeader(): HTMLDivElement {
+    const div = document.createElement('div');
+    div.classList.add('header');
+    div.innerHTML = `
+    <div class="header">
+      <nav class="nav-bar">
+        <div class="logo"></div>
+        <div class="switch toy-page">Игрушки</div>
+        <div class="switch tree-page">Ёлка</div>
+      </nav>
+      <input type="search" class="input-search" autocomplete="off" autofocus placeholder="Поиск">
+      <div class="select"><span>0</span></div>
+    </div>
+    `;
+    return div;
+  }
+
   static createFiltersContainer(): HTMLDivElement {
     const filtersContainer = document.createElement('div');
     filtersContainer.classList.add('filters_container');
@@ -49,6 +66,8 @@ export class Decorations {
   }
 
   render(): HTMLElement {
+    const header = Decorations.createHeader();
+    document.body.append(header);
     const filtersContainer = Decorations.createFiltersContainer();
     this.container.append(filtersContainer);
     const decorationContainer = Decorations.createDecorationItemsContainer();

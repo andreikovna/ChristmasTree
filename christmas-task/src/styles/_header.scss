@@ -1,0 +1,88 @@
+.header {
+  height: 10vh;
+  background-color: $dark-green;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-search {
+  margin-left: 45%;
+  width: 25%;
+  border: 1px solid #3ddfd1;
+  background: radial-gradient(
+    118.88% 606.86% at 0% 0%,
+    rgba(36, 197, 219, 0.15) 0%,
+    rgba(36, 197, 219, 0) 100%
+  );
+  backdrop-filter: blur(31px);
+  border-radius: 30px;
+  color: white;
+  padding: 5px 20px;
+  font-size: 20px;
+  &::-webkit-search-cancel-button {
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+    background: url("./assets/svg/cancel.svg") no-repeat;
+    background-size: 20px 20px;
+    filter: invert(100%) sepia(82%) saturate(2%) hue-rotate(89deg)
+      brightness(110%) contrast(100%);
+  }
+  &::placeholder {
+    color: white;
+    opacity: 0.8;
+  }
+}
+
+.select {
+  width: 48px;
+  height: 60px;
+  background-image: url(./assets/svg/ball-2.svg);
+  background-size: 48px 60px;
+  background-position: left -8px;
+  background-repeat: no-repeat;
+  transition: .3s;
+  margin: 0 2rem;
+}
+
+.select span {
+  display: inline-block;
+  min-width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 4px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  background-color: #278D9F;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 48px;
+  height: 60px;
+  margin-left: 1rem;
+  background-image: url('./assets/png/treeMainPage.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.switch{
+  position: relative;
+  display: block;
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 20px;
+  transition: .3s;
+}

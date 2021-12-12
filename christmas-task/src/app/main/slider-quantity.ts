@@ -17,7 +17,7 @@ export function quantitySlider(): void {
   const inputQuantity1 = document.querySelector('.max-quantity') as HTMLInputElement;
   const inputsQuantity = [inputQuantity0, inputQuantity1];
 
-  sliderQuantity.noUiSlider.on(
+  sliderQuantity.noUiSlider?.on(
     'update',
     function (values: number[], handle: number) {
       inputsQuantity[handle].value = String(Math.round(values[handle]));
