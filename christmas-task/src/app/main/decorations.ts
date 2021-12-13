@@ -15,17 +15,32 @@ export class Decorations {
   static createHeader(): HTMLDivElement {
     const div = document.createElement('div');
     div.classList.add('header');
-    div.innerHTML = `
-    <div class="header">
-      <nav class="nav-bar">
-        <div class="logo"></div>
-        <div class="switch toy-page">Игрушки</div>
-        <div class="switch tree-page">Ёлка</div>
-      </nav>
+    const nav = document.createElement('nav');
+    nav.classList.add('nav-bar');
+    div.append(nav);
+
+    const logo = document.createElement('div');
+    logo.classList.add('logo');
+    const toysPage = document.createElement('div');
+    toysPage.classList.add('switch-toy-page');
+    toysPage.textContent = 'Игрушки';
+    const treePage = document.createElement('div');
+    treePage.classList.add('switch-tree-page');
+    treePage.textContent = 'Ёлка';
+
+    nav.append(logo);
+    nav.append(toysPage);
+    nav.append(treePage);
+
+    const search = document.createElement('div');
+    search.classList.add('search-wrapper');
+
+    div.append(search);
+    search.innerHTML = `
       <input type="search" class="input-search" autocomplete="off" autofocus placeholder="Поиск">
       <div class="select"><span>0</span></div>
-    </div>
     `;
+    div.style.backgroundImage = 'url("./assets/background.png")';
     return div;
   }
 
@@ -38,10 +53,6 @@ export class Decorations {
     filtersContainer.append(filters);
     return filtersContainer;
   }
-
-  // createFilters(): HTMLDivElement {
-
-  // }
 
   static createDecorationItemsContainer(): HTMLDivElement {
     const decorationItemsContainer = document.createElement('div');

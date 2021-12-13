@@ -6,8 +6,6 @@ import { yearSlider } from './slider-year';
 export class MainPage {
   private container: HTMLElement;
 
-  // decorations: Decorations;
-
   static TextObject = {
     MainTitle: 'Помогите бабушке нарядить елку',
     buttonText: 'Начать',
@@ -22,14 +20,25 @@ export class MainPage {
   static createHeader(): HTMLDivElement {
     const div = document.createElement('div');
     div.classList.add('header');
-    div.innerHTML = `
-    <div class="header">
-    <nav class="nav-bar">
-      <div class="logo"></div>
-      <div class="switch toy-page">Игрушки</div>
-      <div class="switch tree-page">Ёлка</div>
-    </nav>
-  </div>`;
+    const nav = document.createElement('nav');
+    nav.classList.add('nav-bar');
+    div.append(nav);
+
+    const logo = document.createElement('div');
+    logo.classList.add('logo');
+    const toysPage = document.createElement('div');
+    toysPage.classList.add('switch-toy-page');
+    toysPage.textContent = 'Игрушки';
+    const treePage = document.createElement('div');
+    treePage.classList.add('switch-tree-page');
+    treePage.textContent = 'Ёлка';
+
+    nav.append(logo);
+    nav.append(toysPage);
+    nav.append(treePage);
+
+    toysPage.addEventListener('click', MainPage.openDecorations, { once: true });
+
     return div;
   }
 
@@ -80,6 +89,8 @@ export class MainPage {
     document.body.append(decorationsPage);
     quantitySlider();
     yearSlider();
+    // const logo = document.querySelector('.logo');
+    // logo?.addEventListener('click',
   }
 
   render(): HTMLElement {
