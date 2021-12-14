@@ -3,7 +3,7 @@ import noUiSlider from 'nouislider';
 export function yearSlider() :void {
   const sliderYear = document.getElementById('slider-year') as HTMLElement;
 
-  noUiSlider.create(sliderYear, {
+  const slider = noUiSlider.create(sliderYear, {
     start: [1940, 2020],
     connect: true,
     step: 1,
@@ -17,7 +17,7 @@ export function yearSlider() :void {
   const inputYear1 = document.querySelector('.max-year') as HTMLInputElement;
   const inputsYear = [inputYear0, inputYear1];
 
-  sliderYear.noUiSlider?.on('update', function (values: number[], handle: number) {
-    inputsYear[handle].value = String(Math.round(values[handle]));
+  slider.on('update', (values: (string | number)[], handle: number) => {
+    inputsYear[handle].value = String(Math.round(Number(values[handle])));
   });
 }

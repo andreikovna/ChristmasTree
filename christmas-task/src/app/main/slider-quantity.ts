@@ -1,9 +1,9 @@
-import noUiSlider from 'nouislider';
+import noUiSlider, { target } from 'nouislider';
 
 export function quantitySlider(): void {
-  const sliderQuantity = document.getElementById('slider-quantity') as HTMLElement;
+  const sliderQuantity = <target>document.getElementById('slider-quantity');
 
-  noUiSlider.create(sliderQuantity, {
+  const slider = noUiSlider.create(sliderQuantity, {
     start: [1, 12],
     connect: true,
     step: 1,
@@ -17,10 +17,10 @@ export function quantitySlider(): void {
   const inputQuantity1 = document.querySelector('.max-quantity') as HTMLInputElement;
   const inputsQuantity = [inputQuantity0, inputQuantity1];
 
-  sliderQuantity.noUiSlider?.on(
+  slider.on(
     'update',
-    function (values: number[], handle: number) {
-      inputsQuantity[handle].value = String(Math.round(values[handle]));
+    (values: (string | number)[], handle: number) => {
+      inputsQuantity[handle].value = String(Math.round(Number(values[handle])));
     },
   );
 }
