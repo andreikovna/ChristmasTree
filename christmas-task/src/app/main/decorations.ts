@@ -1,6 +1,7 @@
 import data from '../../assets/data';
 import { ChristmasDecorationItem } from './ChristmasDecorationItem';
 import { Filter } from './filter';
+import { IDecorations } from './interfaces/decorations.interface';
 import { Sorter } from './sorter';
 
 export class Decorations {
@@ -49,18 +50,16 @@ export class Decorations {
     filtersContainer.classList.add('filters_container');
     const sorterContainer = Sorter.createSorter();
     filtersContainer.append(sorterContainer);
-    const filters = Filter.createFilter();
-    filtersContainer.append(filters);
+    const filter = new Filter();
+    const filterItemContainer = filter.createFilter();
+    filtersContainer.append(filterItemContainer);
     return filtersContainer;
   }
 
-  static createDecorationItemsContainer(): HTMLDivElement {
-    const decorationItemsContainer = document.createElement('div');
-    decorationItemsContainer.classList.add('decoration_items_container');
-    let decorationItem;
-
+  static getAllDecorationsItem() :IDecorations[] {
+    const allDecorations: IDecorations[] = [];
     data.forEach((el) => {
-      decorationItem = new ChristmasDecorationItem(
+      const decorationItem = new ChristmasDecorationItem(
         el.num,
         el.name,
         el.count,
@@ -70,6 +69,43 @@ export class Decorations {
         el.size,
         el.favorite,
       );
+      allDecorations.push(decorationItem);
+    });
+    // console.log(allDecorations);
+    return allDecorations;
+  }
+
+  // static setBall() {
+  //   const ball = 'шар';
+  //   console.log(ball);
+  // }
+
+  // static setBall() {
+  //   const ball = 'шар';
+  //   console.log(ball);
+  // }
+
+  static filterDecorationsItem() :IDecorations[] {
+    const allDecorations = Decorations.getAllDecorationsItem();
+    const shapeFilter = Filter.filterShape(allDecorations);
+    // console.log('отобрали по шару', shapeFilter);
+    const colorFilter = Filter.filterColor(shapeFilter);
+    // console.log('отобрали по цвету', colorFilter);
+    const favouritesOnly = Filter.filterFavourites(colorFilter);
+    const chosenDecorations = favouritesOnly;
+
+    return chosenDecorations;
+  }
+
+  static createDecorationItemsContainer(): HTMLDivElement {
+    const decorationItemsContainer = document.createElement('div');
+    decorationItemsContainer.classList.add('decoration_items_container');
+
+    const chosenDecorations = Decorations.filterDecorationsItem();
+    console.log(chosenDecorations);
+
+    chosenDecorations.forEach((el) => {
+      const decorationItem = el;
       decorationItemsContainer.append(decorationItem.createElement());
     });
 
@@ -83,6 +119,7 @@ export class Decorations {
     this.container.append(filtersContainer);
     const decorationContainer = Decorations.createDecorationItemsContainer();
     this.container.append(decorationContainer);
+
     return this.container;
   }
 }

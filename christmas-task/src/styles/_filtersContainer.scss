@@ -35,14 +35,24 @@
 }
 
 .filter_item_container {
-  margin: 1rem;
+  margin: 0 1rem;
 }
 
-.filter_shape{
+.filter_shape,
+.filter_quantity,
+.filter_year {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.container-for-filters{
+  display: flex;
   margin: 1rem 0;
   margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
 }
 
 .shape_container{
@@ -50,6 +60,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 0.3rem;
 }
 
 .img_shape {
@@ -68,30 +79,30 @@
   margin: 0.5rem;
 }
 
-.bell{
+.колокольчик{
   background-image: url("./assets/shape/bell.png");
 }
 
-.pine{
+.шишка{
   background-image: url('./assets/shape/pine.png');
 }
 
-.ball{
+.шар{
   background-image: url('./assets/shape/ball.png');
 }
 
-.snowflake{
+.снежинка{
   background-image: url('./assets/shape/snowflake.png');
 }
 
-.bird-toy{
+.фигурка{
   background-image: url('./assets/shape/bird_toy.png');
 }
 
 .filter_color{
 display: flex;
+flex-direction: column;
 margin: 1rem 0;
-margin-bottom: 3rem;
 }
 
 .color{

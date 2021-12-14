@@ -27,6 +27,7 @@
   appearance: none;
   margin: 0;
 }
+
 .min-quantity,
 .max-quantity,
 .min-year,
@@ -50,20 +51,9 @@
     rgba(157, 243, 255, 0.2) 100%
   );
 }
-.filter_quantity,
-.filter_year {
-  display: flex;
-  column-gap: 20px;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem 0;
-}
+
 .slider-quantity,
 .slider-year {
-  width: 250px;
-  margin-top: 0;
-}
-
-.filter_year{
-  margin-bottom: 3rem;
+  width: 50%;
+  margin: 0 1.5rem;
 }

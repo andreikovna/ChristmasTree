@@ -15,9 +15,9 @@ export class ChristmasDecorationItem {
 
   favourite: boolean;
 
-  chosenItems: string[];
+  chosenItems: number[];
 
-  maxNumberOfChosen: number;
+  // maxNumberOfChosen: number;
 
   constructor(
     num: string,
@@ -38,7 +38,7 @@ export class ChristmasDecorationItem {
     this.size = size;
     this.favourite = favourite;
     this.chosenItems = new Array(0);
-    this.maxNumberOfChosen = 20;
+    // this.maxNumberOfChosen = 20;
   }
 
   createElement(): HTMLDivElement {
@@ -65,26 +65,28 @@ export class ChristmasDecorationItem {
     const imageFavourite = document.createElement('div');
     imageFavourite.classList.add('imageFavourite');
     imageFavourite.setAttribute('data-number', this.num);
-    imageFavourite.addEventListener('click', this.addToFavourite);
+    imageFavourite.addEventListener('click', ChristmasDecorationItem.addToFavourite);
+    imageFavourite.addEventListener('click', this.showChosen);
 
     div.append(favourite);
     div.append(imageFavourite);
+
     return div;
   }
 
-  addToFavourite(event: Event): void {
-    const allSnowflakes = document.querySelectorAll('.imageFavourite');
-    const target = event.target as HTMLElement & {
-      dataset: Record<string, string>;
-    };
-    if (target.dataset) {
-      const chosen = allSnowflakes[Number(target.dataset.number) - 1] as HTMLElement;
-      chosen.style.backgroundImage = 'url("./assets/png/snow_chosen.png")';
-    }
-    this.checkMaxFavourite();
+  static addToFavourite(event: Event): void {
+    const target = event.target as HTMLElement;
+    target.style.backgroundImage = 'url("./assets/png/snow_chosen.png")';
   }
 
-  checkMaxFavourite() : string[] {
-    return this.chosenItems;
+  showChosen(event: Event): void {
+    const target = event.target as Element & { dataset: Record<string, string> };
+    console.log(Number(target.dataset.number));
+    this.chosenItems.push(1);
+    console.log(this.chosenItems);
   }
+
+  // checkMaxFavourite() : string[] {
+  //   return this.chosenItems;
+  // }
 }
