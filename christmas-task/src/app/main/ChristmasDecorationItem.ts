@@ -27,7 +27,7 @@ export class ChristmasDecorationItem {
     shape: string,
     color: string,
     size: string,
-    favourite: boolean
+    favourite: boolean,
   ) {
     this.num = num;
     this.name = name;
@@ -88,7 +88,7 @@ export class ChristmasDecorationItem {
       ChristmasDecorationItem.addToFavourite(event);
       this.chosenItems.push(numb);
     } else {
-      alert('слоты заполнены');
+      // alert('слоты заполнены');
     }
 
     console.log(this.chosenItems);

@@ -1,3 +1,4 @@
+import { ColorFilter } from './colorFilter';
 import data from '../../assets/data';
 import { IDecorations } from './interfaces/decorations.interface';
 import { ShapeFilter } from './shapeFilter';
@@ -19,8 +20,13 @@ export class Filter {
     const uniqueShape = Array.from(uniqueShapeSet);
 
     const shapeFilter = new ShapeFilter(uniqueShape);
-    const container = shapeFilter.createShapeFilter();
-    this.container.append(container);
+    const containerShape = shapeFilter.createShapeFilter();
+    this.container.append(containerShape);
+
+    const colorFilter = new ColorFilter();
+    const containerColor = colorFilter.createColorFilter();
+    this.container.append(containerColor);
+
     return this.container;
   }
 

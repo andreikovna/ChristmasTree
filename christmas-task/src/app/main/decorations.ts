@@ -1,5 +1,6 @@
 import data from '../../assets/data';
 import { ChristmasDecorationItem } from './ChristmasDecorationItem';
+import { ColorFilter } from './colorFilter';
 import { Filter } from './filter';
 import { IDecorations } from './interfaces/decorations.interface';
 import { ShapeFilter } from './shapeFilter';
@@ -10,11 +11,14 @@ export class Decorations {
 
   filterShape: string [];
 
+  filterColor: string [];
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
     this.container.id = id;
     this.filterShape = [];
+    this.filterColor = [];
   }
 
   static createHeader(): HTMLDivElement {
@@ -90,13 +94,29 @@ export class Decorations {
     }
 
     console.log(this.filterShape);
-    Decorations.filterDecorationsItem(this.filterShape);
+    this.filterDecorationsItem();
   };
 
-  static filterDecorationsItem(shape: string []) :void {
+  selectColor = (event: Event) :void => {
+    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+    const { color } = target.dataset;
+    if (this.filterColor.includes(color)) {
+      target.classList.remove('color-active');
+      this.filterColor.splice(this.filterColor.indexOf(color), 1);
+    } else {
+      target.classList.add('color-active');
+      this.filterColor.push(color);
+    }
+
+    console.log(this.filterColor);
+    this.filterDecorationsItem();
+  };
+
+  filterDecorationsItem() :void {
     const allDecorations = Decorations.getAllDecorationsItem();
-    const shapeFilter = ShapeFilter.filterShape(allDecorations, shape);
-    const chosenDecorations = shapeFilter;
+    const shapeFilter = ShapeFilter.filterShape(allDecorations, this.filterShape);
+    const colorFilter = ColorFilter.filterColor(shapeFilter, this.filterColor);
+    const chosenDecorations = colorFilter;
     console.log(chosenDecorations);
     Decorations.createChosenItemsContainer(chosenDecorations);
   }
@@ -135,6 +155,9 @@ export class Decorations {
 
     const shape = filtersContainer.querySelector('.filter_shape');
     shape?.addEventListener('click', this.selectShape);
+
+    const color = filtersContainer.querySelector('.filter_color');
+    color?.addEventListener('click', this.selectColor);
 
     return this.container;
   }

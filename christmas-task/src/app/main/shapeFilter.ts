@@ -42,12 +42,13 @@ export class ShapeFilter {
 
   static filterShape(items: IDecorations[], shape: string []) : IDecorations[] {
     let shapeArray = items;
-    return shapeArray = shapeArray.filter((item) => {
+    shapeArray = shapeArray.filter((item) => {
       if (shape.length > 0) {
         return shape.includes(item.shape);
-      } else if (shape.length === 0){
+      } if (shape.length === 0) {
         return true;
       }
     });
+    return shapeArray;
   }
 }
