@@ -103,14 +103,10 @@ export class Filter {
   //   return this.container;
   // }
 
-  static ball() {
-    console.log('ball');
-  }
-
-  static filterShape(items: IDecorations[]) : IDecorations[] {
-    const filteredItems = items.filter((item) => item.shape === 'шар' || item.shape === 'шишка');
-    return filteredItems;
-  }
+  // static filterShape(items: IDecorations[], shape: string) : IDecorations[] {
+  //   const filteredItems = items.filter((item) => item.shape === shape);
+  //   return filteredItems;
+  // }
 
   static filterColor(items: IDecorations[]) : IDecorations[] {
     const filteredItems = items.filter((item) => item.color === 'красный' || item.color === 'желтый');

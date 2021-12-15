@@ -40,8 +40,14 @@ export class ShapeFilter {
     return shapeContainer;
   }
 
-  static filterShape(items: IDecorations[]) : IDecorations[] {
-    const filteredItems = items.filter((item) => item.shape === 'шар' || item.shape === 'шишка');
-    return filteredItems;
+  static filterShape(items: IDecorations[], shape: string []) : IDecorations[] {
+    let shapeArray = items;
+    return shapeArray = shapeArray.filter((item) => {
+      if (shape.length > 0) {
+        return shape.includes(item.shape);
+      } else if (shape.length === 0){
+        return true;
+      }
+    });
   }
 }

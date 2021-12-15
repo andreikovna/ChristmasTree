@@ -2,15 +2,19 @@ import data from '../../assets/data';
 import { ChristmasDecorationItem } from './ChristmasDecorationItem';
 import { Filter } from './filter';
 import { IDecorations } from './interfaces/decorations.interface';
+import { ShapeFilter } from './shapeFilter';
 import { Sorter } from './sorter';
 
 export class Decorations {
   private container: HTMLElement;
 
+  filterShape: string [];
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
     this.container.id = id;
+    this.filterShape = [];
   }
 
   static createHeader(): HTMLDivElement {
@@ -71,40 +75,49 @@ export class Decorations {
       );
       allDecorations.push(decorationItem);
     });
-    // console.log(allDecorations);
     return allDecorations;
   }
 
-  // static setBall() {
-  //   const ball = 'шар';
-  //   console.log(ball);
-  // }
+  selectShape = (event: Event) :void => {
+    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+    const { shape } = target.dataset;
+    if (this.filterShape.includes(shape)) {
+      target.classList.remove('active');
+      this.filterShape.splice(this.filterShape.indexOf(shape), 1);
+    } else {
+      target.classList.add('active');
+      this.filterShape.push(shape);
+    }
 
-  // static setBall() {
-  //   const ball = 'шар';
-  //   console.log(ball);
-  // }
+    console.log(this.filterShape);
+    Decorations.filterDecorationsItem(this.filterShape);
+  };
 
-  static filterDecorationsItem() :IDecorations[] {
+  static filterDecorationsItem(shape: string []) :void {
     const allDecorations = Decorations.getAllDecorationsItem();
-    const shapeFilter = Filter.filterShape(allDecorations);
-    // console.log('отобрали по шару', shapeFilter);
-    const colorFilter = Filter.filterColor(shapeFilter);
-    // console.log('отобрали по цвету', colorFilter);
-    const favouritesOnly = Filter.filterFavourites(colorFilter);
-    const chosenDecorations = favouritesOnly;
+    const shapeFilter = ShapeFilter.filterShape(allDecorations, shape);
+    const chosenDecorations = shapeFilter;
+    console.log(chosenDecorations);
+    Decorations.createChosenItemsContainer(chosenDecorations);
+  }
 
-    return chosenDecorations;
+  static createChosenItemsContainer(chosenDecorations: IDecorations []): void {
+    const decorationItemsContainer = document.querySelector('.decoration_items_container') as HTMLDivElement;
+    decorationItemsContainer.innerHTML = '';
+
+    chosenDecorations.forEach((el) => {
+      const decorationItem = el;
+      decorationItemsContainer.append(decorationItem.createElement());
+    });
   }
 
   static createDecorationItemsContainer(): HTMLDivElement {
     const decorationItemsContainer = document.createElement('div');
     decorationItemsContainer.classList.add('decoration_items_container');
 
-    const chosenDecorations = Decorations.filterDecorationsItem();
-    console.log(chosenDecorations);
+    const aLLDecorations = Decorations.getAllDecorationsItem();
 
-    chosenDecorations.forEach((el) => {
+    aLLDecorations.forEach((el) => {
       const decorationItem = el;
       decorationItemsContainer.append(decorationItem.createElement());
     });
@@ -119,6 +132,9 @@ export class Decorations {
     this.container.append(filtersContainer);
     const decorationContainer = Decorations.createDecorationItemsContainer();
     this.container.append(decorationContainer);
+
+    const shape = filtersContainer.querySelector('.filter_shape');
+    shape?.addEventListener('click', this.selectShape);
 
     return this.container;
   }

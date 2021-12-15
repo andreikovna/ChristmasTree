@@ -17,7 +17,7 @@ export class ChristmasDecorationItem {
 
   chosenItems: number[];
 
-  // maxNumberOfChosen: number;
+  maxNumberOfChosen: number;
 
   constructor(
     num: string,
@@ -27,7 +27,7 @@ export class ChristmasDecorationItem {
     shape: string,
     color: string,
     size: string,
-    favourite: boolean,
+    favourite: boolean
   ) {
     this.num = num;
     this.name = name;
@@ -38,7 +38,7 @@ export class ChristmasDecorationItem {
     this.size = size;
     this.favourite = favourite;
     this.chosenItems = new Array(0);
-    // this.maxNumberOfChosen = 20;
+    this.maxNumberOfChosen = 20;
   }
 
   createElement(): HTMLDivElement {
@@ -66,7 +66,7 @@ export class ChristmasDecorationItem {
     imageFavourite.classList.add('imageFavourite');
     imageFavourite.setAttribute('data-number', this.num);
     imageFavourite.addEventListener('click', ChristmasDecorationItem.addToFavourite);
-    imageFavourite.addEventListener('click', this.showChosen);
+    imageFavourite.addEventListener('click', this.addToFavourite);
 
     div.append(favourite);
     div.append(imageFavourite);
@@ -74,19 +74,23 @@ export class ChristmasDecorationItem {
     return div;
   }
 
-  static addToFavourite(event: Event): void {
+  static addToFavourite = (event: Event): void => {
     const target = event.target as HTMLElement;
-    target.style.backgroundImage = 'url("./assets/png/snow_chosen.png")';
-  }
+    target.classList.add('active');
+  };
 
-  showChosen(event: Event): void {
-    const target = event.target as Element & { dataset: Record<string, string> };
-    console.log(Number(target.dataset.number));
-    this.chosenItems.push(1);
+  addToFavourite = (event: Event): void => {
+    const target = event.target as Element & {
+      dataset: Record<string, string>;
+    };
+    const numb = Number(target.dataset.number);
+    if (this.chosenItems.length <= this.maxNumberOfChosen) {
+      ChristmasDecorationItem.addToFavourite(event);
+      this.chosenItems.push(numb);
+    } else {
+      alert('слоты заполнены');
+    }
+
     console.log(this.chosenItems);
-  }
-
-  // checkMaxFavourite() : string[] {
-  //   return this.chosenItems;
-  // }
+  };
 }
