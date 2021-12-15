@@ -35,9 +35,8 @@ export class ColorFilter {
     colorArray = colorArray.filter((item) => {
       if (color.length > 0) {
         return color.includes(item.color);
-      } if (color.length === 0) {
-        return true;
       }
+      return true;
     });
     return colorArray;
   }

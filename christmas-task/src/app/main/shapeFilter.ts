@@ -45,9 +45,8 @@ export class ShapeFilter {
     shapeArray = shapeArray.filter((item) => {
       if (shape.length > 0) {
         return shape.includes(item.shape);
-      } if (shape.length === 0) {
-        return true;
       }
+      return true;
     });
     return shapeArray;
   }

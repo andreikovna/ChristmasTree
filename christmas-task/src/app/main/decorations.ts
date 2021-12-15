@@ -4,6 +4,7 @@ import { ColorFilter } from './colorFilter';
 import { Filter } from './filter';
 import { IDecorations } from './interfaces/decorations.interface';
 import { ShapeFilter } from './shapeFilter';
+import { SizeFilter } from './sizeFilter';
 import { Sorter } from './sorter';
 
 export class Decorations {
@@ -13,12 +14,15 @@ export class Decorations {
 
   filterColor: string [];
 
+  filterSize: string [];
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
     this.container.id = id;
     this.filterShape = [];
     this.filterColor = [];
+    this.filterSize = [];
   }
 
   static createHeader(): HTMLDivElement {
@@ -112,11 +116,27 @@ export class Decorations {
     this.filterDecorationsItem();
   };
 
+  selectSize = (event: Event) :void => {
+    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+    const { size } = target.dataset;
+    if (this.filterSize.includes(size)) {
+      target.classList.remove('active');
+      this.filterSize.splice(this.filterSize.indexOf(size), 1);
+    } else {
+      target.classList.add('active');
+      this.filterSize.push(size);
+    }
+
+    console.log(this.filterSize);
+    this.filterDecorationsItem();
+  };
+
   filterDecorationsItem() :void {
     const allDecorations = Decorations.getAllDecorationsItem();
     const shapeFilter = ShapeFilter.filterShape(allDecorations, this.filterShape);
     const colorFilter = ColorFilter.filterColor(shapeFilter, this.filterColor);
-    const chosenDecorations = colorFilter;
+    const sizeFilter = SizeFilter.filterSize(colorFilter, this.filterSize);
+    const chosenDecorations = sizeFilter;
     console.log(chosenDecorations);
     Decorations.createChosenItemsContainer(chosenDecorations);
   }
@@ -158,6 +178,9 @@ export class Decorations {
 
     const color = filtersContainer.querySelector('.filter_color');
     color?.addEventListener('click', this.selectColor);
+
+    const size = filtersContainer.querySelector('.filter_size');
+    size?.addEventListener('click', this.selectSize);
 
     return this.container;
   }
