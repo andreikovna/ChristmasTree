@@ -1,8 +1,9 @@
-import { ColorFilter } from './colorFilter';
+import { ColorFilter } from './filters/colorFilter';
 import data from '../../assets/data';
 import { IDecorations } from './interfaces/decorations.interface';
-import { ShapeFilter } from './shapeFilter';
-import { SizeFilter } from './sizeFilter';
+import { ShapeFilter } from './filters/shapeFilter';
+import { SizeFilter } from './filters/sizeFilter';
+import { FavouriteFilter } from './filters/favouriteFilter';
 
 export class Filter {
   container: HTMLDivElement;
@@ -32,6 +33,10 @@ export class Filter {
     const containerSize = sizeFilter.createSizeFilter();
     this.container.append(containerSize);
 
+    const favouriteFilter = new FavouriteFilter();
+    const containerFilter = favouriteFilter.createFavouriteFilter();
+    this.container.append(containerFilter);
+
     return this.container;
   }
 
@@ -55,16 +60,6 @@ export class Filter {
   //       <input type="number" class="max-year" value="2020" readonly>
   //     </div>
   //   </div>
-
-  //   <div class="favourite-toys">
-  //     <input type="checkbox" id="favourite-toys" name="favourite-toys" />
-  //     <label for="favourite-toys">Только любимые</label>
-  //   </div>
   //   `;
     // }
-
-  static filterFavourites(items: IDecorations[]) : IDecorations[] {
-    const filteredItems = items.filter((item) => item.favourite === true);
-    return filteredItems;
-  }
 }

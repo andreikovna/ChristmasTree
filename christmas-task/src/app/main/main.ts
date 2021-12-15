@@ -87,8 +87,8 @@ export class MainPage {
     document.body.innerHTML = '';
     const decorationsPage = decorations.render();
     document.body.append(decorationsPage);
-    // quantitySlider();
-    // yearSlider();
+    quantitySlider();
+    yearSlider();
   }
 
   render(): HTMLElement {

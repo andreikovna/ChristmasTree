@@ -1,4 +1,4 @@
-import { IDecorations } from './interfaces/decorations.interface';
+import { IDecorations } from '../interfaces/decorations.interface';
 
 export class ShapeFilter {
   container: HTMLDivElement;

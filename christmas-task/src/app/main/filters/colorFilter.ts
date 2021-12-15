@@ -1,4 +1,4 @@
-import { IDecorations } from './interfaces/decorations.interface';
+import { IDecorations } from '../interfaces/decorations.interface';
 
 export class ColorFilter {
   container: HTMLDivElement;

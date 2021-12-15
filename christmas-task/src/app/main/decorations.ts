@@ -1,11 +1,12 @@
 import data from '../../assets/data';
 import { ChristmasDecorationItem } from './ChristmasDecorationItem';
-import { ColorFilter } from './colorFilter';
+import { ColorFilter } from './filters/colorFilter';
 import { Filter } from './filter';
 import { IDecorations } from './interfaces/decorations.interface';
-import { ShapeFilter } from './shapeFilter';
-import { SizeFilter } from './sizeFilter';
+import { ShapeFilter } from './filters/shapeFilter';
+import { SizeFilter } from './filters/sizeFilter';
 import { Sorter } from './sorter';
+import { FavouriteFilter } from './filters/favouriteFilter';
 
 export class Decorations {
   private container: HTMLElement;
@@ -16,6 +17,8 @@ export class Decorations {
 
   filterSize: string [];
 
+  filterFavourite: string [];
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
@@ -23,6 +26,7 @@ export class Decorations {
     this.filterShape = [];
     this.filterColor = [];
     this.filterSize = [];
+    this.filterFavourite = [];
   }
 
   static createHeader(): HTMLDivElement {
@@ -97,7 +101,6 @@ export class Decorations {
       this.filterShape.push(shape);
     }
 
-    console.log(this.filterShape);
     this.filterDecorationsItem();
   };
 
@@ -112,7 +115,6 @@ export class Decorations {
       this.filterColor.push(color);
     }
 
-    console.log(this.filterColor);
     this.filterDecorationsItem();
   };
 
@@ -127,16 +129,25 @@ export class Decorations {
       this.filterSize.push(size);
     }
 
-    console.log(this.filterSize);
+    this.filterDecorationsItem();
+  };
+
+  selectFavourite = () :void => {
     this.filterDecorationsItem();
   };
 
   filterDecorationsItem() :void {
+    let chosenDecorations = [];
     const allDecorations = Decorations.getAllDecorationsItem();
     const shapeFilter = ShapeFilter.filterShape(allDecorations, this.filterShape);
     const colorFilter = ColorFilter.filterColor(shapeFilter, this.filterColor);
     const sizeFilter = SizeFilter.filterSize(colorFilter, this.filterSize);
-    const chosenDecorations = sizeFilter;
+    if ((document.querySelector('.favourite') as HTMLInputElement).checked) {
+      const favouriteFilter = FavouriteFilter.filterFavourite(sizeFilter);
+      chosenDecorations = favouriteFilter;
+    } else {
+      chosenDecorations = sizeFilter;
+    }
     console.log(chosenDecorations);
     Decorations.createChosenItemsContainer(chosenDecorations);
   }
@@ -181,6 +192,9 @@ export class Decorations {
 
     const size = filtersContainer.querySelector('.filter_size');
     size?.addEventListener('click', this.selectSize);
+
+    const favourite = filtersContainer.querySelector('.favourite');
+    favourite?.addEventListener('change', this.selectFavourite);
 
     return this.container;
   }
