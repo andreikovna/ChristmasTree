@@ -21,6 +21,8 @@ export function quantitySlider(): void {
     'update',
     (values: (string | number)[], handle: number) => {
       inputsQuantity[handle].value = String(Math.round(Number(values[handle])));
+      const change = new Event('change');
+      inputsQuantity[handle].dispatchEvent(change);
     },
   );
 }

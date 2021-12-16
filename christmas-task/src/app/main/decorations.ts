@@ -1,3 +1,5 @@
+import { YearFilter } from './filters/yearFilter';
+import { QuantityFilter } from './filters/quantityFilter';
 import data from '../../assets/data';
 import { ChristmasDecorationItem } from './ChristmasDecorationItem';
 import { ColorFilter } from './filters/colorFilter';
@@ -19,6 +21,14 @@ export class Decorations {
 
   filterFavourite: string [];
 
+  minQuantity: number;
+
+  maxQuantity: number;
+
+  minYear: number;
+
+  maxYear: number;
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
@@ -27,6 +37,10 @@ export class Decorations {
     this.filterColor = [];
     this.filterSize = [];
     this.filterFavourite = [];
+    this.minQuantity = 1;
+    this.maxQuantity = 12;
+    this.minYear = 1940;
+    this.maxYear = 2020;
   }
 
   static createHeader(): HTMLDivElement {
@@ -132,6 +146,22 @@ export class Decorations {
     this.filterDecorationsItem();
   };
 
+  selectQuantity = () :void => {
+    const minQuantity = document.querySelector('.min-quantity') as HTMLInputElement;
+    this.minQuantity = Number(minQuantity.value);
+    const maxQuantity = document.querySelector('.max-quantity') as HTMLInputElement;
+    this.maxQuantity = Number(maxQuantity.value);
+    this.filterDecorationsItem();
+  };
+
+  selectYear = () :void => {
+    const minYear = document.querySelector('.min-year') as HTMLInputElement;
+    this.minYear = Number(minYear.value);
+    const maxYear = document.querySelector('.max-year') as HTMLInputElement;
+    this.maxYear = Number(maxYear.value);
+    this.filterDecorationsItem();
+  };
+
   selectFavourite = () :void => {
     this.filterDecorationsItem();
   };
@@ -140,7 +170,9 @@ export class Decorations {
     let chosenDecorations = [];
     const allDecorations = Decorations.getAllDecorationsItem();
     const shapeFilter = ShapeFilter.filterShape(allDecorations, this.filterShape);
-    const colorFilter = ColorFilter.filterColor(shapeFilter, this.filterColor);
+    const quantityFilter = QuantityFilter.filterQuantity(shapeFilter, this.minQuantity, this.maxQuantity);
+    const yearFilter = YearFilter.filterYear(quantityFilter, this.minYear, this.maxYear);
+    const colorFilter = ColorFilter.filterColor(yearFilter, this.filterColor);
     const sizeFilter = SizeFilter.filterSize(colorFilter, this.filterSize);
     if ((document.querySelector('.favourite') as HTMLInputElement).checked) {
       const favouriteFilter = FavouriteFilter.filterFavourite(sizeFilter);
@@ -195,6 +227,18 @@ export class Decorations {
 
     const favourite = filtersContainer.querySelector('.favourite');
     favourite?.addEventListener('change', this.selectFavourite);
+
+    const minQuantity = filtersContainer.querySelector('.min-quantity');
+    minQuantity?.addEventListener('change', this.selectQuantity);
+
+    const maxQuantity = filtersContainer.querySelector('.max-quantity');
+    maxQuantity?.addEventListener('change', this.selectQuantity);
+
+    const minYear = filtersContainer.querySelector('.min-year');
+    minYear?.addEventListener('change', this.selectYear);
+
+    const maxYear = filtersContainer.querySelector('.max-year');
+    maxYear?.addEventListener('change', this.selectYear);
 
     return this.container;
   }
