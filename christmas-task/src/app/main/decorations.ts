@@ -19,8 +19,6 @@ export class Decorations {
 
   filterSize: string [];
 
-  filterFavourite: string [];
-
   minQuantity: number;
 
   maxQuantity: number;
@@ -40,7 +38,6 @@ export class Decorations {
     this.filterShape = [];
     this.filterColor = [];
     this.filterSize = [];
-    this.filterFavourite = [];
     this.minQuantity = 1;
     this.maxQuantity = 12;
     this.minYear = 1940;
@@ -112,18 +109,15 @@ export class Decorations {
 
   sortItems = () :void => {
     this.allDecorations = Decorations.getAllDecorationsItem();
-    let sorter: IDecorations[] = [];
     const sorterInput = document.querySelector('.sorter_input') as HTMLSelectElement;
     if (sorterInput.value === "По названию от 'A' до 'Я'") {
-      sorter = Sorter.sortABC(this.allDecorations);
+      this.allDecorations = Sorter.sortABC(this.allDecorations);
     } else if (sorterInput.value === "По названию от 'Я' до 'А'") {
-      sorter = Sorter.sortCBA(this.allDecorations);
+      this.allDecorations = Sorter.sortCBA(this.allDecorations);
     } else if (sorterInput.value === 'По дате по возрастанию') {
-      sorter = Sorter.sortYearUp(this.allDecorations);
+      this.allDecorations = Sorter.sortYearUp(this.allDecorations);
     } else if (sorterInput.value === 'По дате по убыванию') {
-      sorter = Sorter.sortYearDown(this.allDecorations);
-    } else {
-      sorter = this.allDecorations;
+      this.allDecorations = Sorter.sortYearDown(this.allDecorations);
     }
     this.filterDecorationsItem();
   };
@@ -134,11 +128,10 @@ export class Decorations {
     if (this.filterShape.includes(shape)) {
       target.classList.remove('active');
       this.filterShape.splice(this.filterShape.indexOf(shape), 1);
-    } else {
+    } else if (target.classList.contains('img_shape')) {
       target.classList.add('active');
       this.filterShape.push(shape);
     }
-
     this.filterDecorationsItem();
   };
 
@@ -148,11 +141,10 @@ export class Decorations {
     if (this.filterColor.includes(color)) {
       target.classList.remove('color-active');
       this.filterColor.splice(this.filterColor.indexOf(color), 1);
-    } else {
+    } else if (target.classList.contains('color')) {
       target.classList.add('color-active');
       this.filterColor.push(color);
     }
-
     this.filterDecorationsItem();
   };
 
@@ -162,7 +154,7 @@ export class Decorations {
     if (this.filterSize.includes(size)) {
       target.classList.remove('active');
       this.filterSize.splice(this.filterSize.indexOf(size), 1);
-    } else {
+    } else if (target.classList.contains('size')) {
       target.classList.add('active');
       this.filterSize.push(size);
     }
@@ -190,6 +182,31 @@ export class Decorations {
     this.filterDecorationsItem();
   };
 
+  resetFilters = () :void => {
+    const shapes = document.querySelectorAll('.img_shape');
+    shapes.forEach((element) => {
+      element.classList.remove('active');
+    });
+    const color = document.querySelectorAll('.color');
+    color.forEach((element) => {
+      element.classList.remove('color-active');
+    });
+    const size = document.querySelectorAll('.size');
+    size.forEach((element) => {
+      element.classList.remove('active');
+    });
+    this.filterShape = [];
+    this.filterColor = [];
+    this.filterSize = [];
+    this.minQuantity = 1;
+    this.maxQuantity = 12;
+    this.minYear = 1940;
+    this.maxYear = 2020;
+    const favourite = document.querySelector('.favourite') as HTMLInputElement;
+    favourite.checked = false;
+    this.sortItems();
+  };
+
   filterDecorationsItem() :void {
     const shapeFilter = ShapeFilter.filterShape(this.allDecorations, this.filterShape);
     const quantityFilter = QuantityFilter.filterQuantity(shapeFilter, this.minQuantity, this.maxQuantity);
@@ -202,7 +219,6 @@ export class Decorations {
     } else {
       this.chosenDecorations = sizeFilter;
     }
-    console.log(this.chosenDecorations);
     Decorations.createChosenItemsContainer(this.chosenDecorations);
   }
 
@@ -264,6 +280,9 @@ export class Decorations {
 
     const sorter = filtersContainer.querySelector('.sorter_input');
     sorter?.addEventListener('change', this.sortItems);
+
+    const resetButton = filtersContainer.querySelector('.reset_button');
+    resetButton?.addEventListener('click', this.resetFilters);
 
     this.allDecorations = Decorations.getAllDecorationsItem();
 

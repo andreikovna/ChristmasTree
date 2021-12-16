@@ -47,7 +47,7 @@ export class Filter {
     this.container.append(containerfavourite);
 
     const resetButton = document.createElement('button');
-    resetButton.classList.add('.reset_button');
+    resetButton.classList.add('reset_button');
     resetButton.textContent = 'Сбросить фильтры';
 
     this.container.append(resetButton);

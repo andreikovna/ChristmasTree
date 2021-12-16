@@ -22,4 +22,11 @@ export function yearSlider() :void {
     const change = new Event('change');
     inputsYear[handle].dispatchEvent(change);
   });
+
+  function resetFilters() :void {
+    slider.set([1940, 2020]);
+  }
+
+  const resetButton = document.querySelector('.reset_button');
+  resetButton?.addEventListener('click', resetFilters);
 }

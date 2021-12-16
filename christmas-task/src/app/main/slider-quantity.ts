@@ -25,4 +25,11 @@ export function quantitySlider(): void {
       inputsQuantity[handle].dispatchEvent(change);
     },
   );
+
+  function resetFilters() :void {
+    slider.set([1, 12]);
+  }
+
+  const resetButton = document.querySelector('.reset_button');
+  resetButton?.addEventListener('click', resetFilters);
 }
