@@ -29,6 +29,10 @@ export class Decorations {
 
   maxYear: number;
 
+  chosenDecorations: IDecorations [];
+
+  allDecorations: IDecorations [];
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
@@ -41,6 +45,8 @@ export class Decorations {
     this.maxQuantity = 12;
     this.minYear = 1940;
     this.maxYear = 2020;
+    this.chosenDecorations = [];
+    this.allDecorations = [];
   }
 
   static createHeader(): HTMLDivElement {
@@ -103,6 +109,24 @@ export class Decorations {
     });
     return allDecorations;
   }
+
+  sortItems = () :void => {
+    this.allDecorations = Decorations.getAllDecorationsItem();
+    let sorter: IDecorations[] = [];
+    const sorterInput = document.querySelector('.sorter_input') as HTMLSelectElement;
+    if (sorterInput.value === "По названию от 'A' до 'Я'") {
+      sorter = Sorter.sortABC(this.allDecorations);
+    } else if (sorterInput.value === "По названию от 'Я' до 'А'") {
+      sorter = Sorter.sortCBA(this.allDecorations);
+    } else if (sorterInput.value === 'По дате по возрастанию') {
+      sorter = Sorter.sortYearUp(this.allDecorations);
+    } else if (sorterInput.value === 'По дате по убыванию') {
+      sorter = Sorter.sortYearDown(this.allDecorations);
+    } else {
+      sorter = this.allDecorations;
+    }
+    this.filterDecorationsItem();
+  };
 
   selectShape = (event: Event) :void => {
     const target = event.target as HTMLElement & { dataset: Record<string, string> };
@@ -167,21 +191,19 @@ export class Decorations {
   };
 
   filterDecorationsItem() :void {
-    let chosenDecorations = [];
-    const allDecorations = Decorations.getAllDecorationsItem();
-    const shapeFilter = ShapeFilter.filterShape(allDecorations, this.filterShape);
+    const shapeFilter = ShapeFilter.filterShape(this.allDecorations, this.filterShape);
     const quantityFilter = QuantityFilter.filterQuantity(shapeFilter, this.minQuantity, this.maxQuantity);
     const yearFilter = YearFilter.filterYear(quantityFilter, this.minYear, this.maxYear);
     const colorFilter = ColorFilter.filterColor(yearFilter, this.filterColor);
     const sizeFilter = SizeFilter.filterSize(colorFilter, this.filterSize);
     if ((document.querySelector('.favourite') as HTMLInputElement).checked) {
       const favouriteFilter = FavouriteFilter.filterFavourite(sizeFilter);
-      chosenDecorations = favouriteFilter;
+      this.chosenDecorations = favouriteFilter;
     } else {
-      chosenDecorations = sizeFilter;
+      this.chosenDecorations = sizeFilter;
     }
-    console.log(chosenDecorations);
-    Decorations.createChosenItemsContainer(chosenDecorations);
+    console.log(this.chosenDecorations);
+    Decorations.createChosenItemsContainer(this.chosenDecorations);
   }
 
   static createChosenItemsContainer(chosenDecorations: IDecorations []): void {
@@ -239,6 +261,11 @@ export class Decorations {
 
     const maxYear = filtersContainer.querySelector('.max-year');
     maxYear?.addEventListener('change', this.selectYear);
+
+    const sorter = filtersContainer.querySelector('.sorter_input');
+    sorter?.addEventListener('change', this.sortItems);
+
+    this.allDecorations = Decorations.getAllDecorationsItem();
 
     return this.container;
   }

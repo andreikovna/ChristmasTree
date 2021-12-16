@@ -2,7 +2,6 @@ import { YearFilter } from './filters/yearFilter';
 import { QuantityFilter } from './filters/quantityFilter';
 import { ColorFilter } from './filters/colorFilter';
 import data from '../../assets/data';
-import { IDecorations } from './interfaces/decorations.interface';
 import { ShapeFilter } from './filters/shapeFilter';
 import { SizeFilter } from './filters/sizeFilter';
 import { FavouriteFilter } from './filters/favouriteFilter';
@@ -44,8 +43,14 @@ export class Filter {
     this.container.append(containerSize);
 
     const favouriteFilter = new FavouriteFilter();
-    const containerFilter = favouriteFilter.createFavouriteFilter();
-    this.container.append(containerFilter);
+    const containerfavourite = favouriteFilter.createFavouriteFilter();
+    this.container.append(containerfavourite);
+
+    const resetButton = document.createElement('button');
+    resetButton.classList.add('.reset_button');
+    resetButton.textContent = 'Сбросить фильтры';
+
+    this.container.append(resetButton);
 
     return this.container;
   }
