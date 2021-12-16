@@ -231,11 +231,17 @@ export class Decorations {
 
   createChosenItemsContainer(chosenDecorations: IDecorations []): void {
     const decorationItemsContainer = document.querySelector('.decoration_items_container') as HTMLDivElement;
-    decorationItemsContainer.innerHTML = '';
-    chosenDecorations.forEach((el) => {
-      const decorationItem = el;
-      decorationItemsContainer.append(decorationItem.createElement(this.chosenItems));
-    });
+    if (this.chosenDecorations.length === 0) {
+      decorationItemsContainer.innerHTML = `
+      <p class="no-toys">Извините, совпадений не обнаружено</p>
+      `;
+    } else {
+      decorationItemsContainer.innerHTML = '';
+      chosenDecorations.forEach((el) => {
+        const decorationItem = el;
+        decorationItemsContainer.append(decorationItem.createElement(this.chosenItems));
+      });
+    }
   }
 
   createDecorationItemsContainer(): HTMLDivElement {
