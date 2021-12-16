@@ -15,10 +15,6 @@ export class ChristmasDecorationItem {
 
   favourite: boolean;
 
-  chosenItems: number[];
-
-  maxNumberOfChosen: number;
-
   constructor(
     num: string,
     name: string,
@@ -37,21 +33,20 @@ export class ChristmasDecorationItem {
     this.color = color;
     this.size = size;
     this.favourite = favourite;
-    this.chosenItems = new Array(0);
-    this.maxNumberOfChosen = 20;
   }
 
-  createElement(): HTMLDivElement {
+  createElement(chosenItems: number[]): HTMLDivElement {
     const div = document.createElement('div');
     div.classList.add('toy-container');
+    div.setAttribute('data-number', this.num);
     div.innerHTML = `
     <h2 class="toy-name">${this.name}</h2>
-    <img class="toy-image" src="../../assets/toys/${this.num}.png">
-    <p class="toy-text" data-count="${this.count}">Количество: ${this.count}</p>
-    <p class="toy-text" data-year="${this.year}">Год покупки: ${this.year}</p>
-    <p class="toy-text" data-shape="${this.shape}">Форма: ${this.shape}</p>
-    <p class="toy-text" data-color="${this.color}">Цвет: ${this.color}</p>
-    <p class="toy-text" data-size="${this.size}">Размер: ${this.size}</p>
+    <img class="toy-image" src="../../assets/toys/${this.num}.png" data-number="${this.num}>
+    <p class="toy-text" data-count="${this.count} data-number="${this.num}">Количество: ${this.count}</p>
+    <p class="toy-text" data-year="${this.year}" data-number="${this.num}">Год покупки: ${this.year}</p>
+    <p class="toy-text" data-shape="${this.shape}" data-number="${this.num}">Форма: ${this.shape}</p>
+    <p class="toy-text" data-color="${this.color}" data-number="${this.num}">Цвет: ${this.color}</p>
+    <p class="toy-text" data-size="${this.size}" data-number="${this.num}">Размер: ${this.size}</p>
     `;
     const favourite = document.createElement('p');
     favourite.classList.add('toy-text');
@@ -64,33 +59,14 @@ export class ChristmasDecorationItem {
     }
     const imageFavourite = document.createElement('div');
     imageFavourite.classList.add('imageFavourite');
+    if (chosenItems.includes(Number(this.num))) {
+      imageFavourite.classList.add('active');
+    }
     imageFavourite.setAttribute('data-number', this.num);
-    imageFavourite.addEventListener('click', ChristmasDecorationItem.addToFavourite);
-    imageFavourite.addEventListener('click', this.addToFavourite);
 
     div.append(favourite);
     div.append(imageFavourite);
 
     return div;
   }
-
-  static addToFavourite = (event: Event): void => {
-    const target = event.target as HTMLElement;
-    target.classList.add('active');
-  };
-
-  addToFavourite = (event: Event): void => {
-    const target = event.target as Element & {
-      dataset: Record<string, string>;
-    };
-    const numb = Number(target.dataset.number);
-    if (this.chosenItems.length <= this.maxNumberOfChosen) {
-      ChristmasDecorationItem.addToFavourite(event);
-      this.chosenItems.push(numb);
-    } else {
-      // alert('слоты заполнены');
-    }
-
-    console.log(this.chosenItems);
-  };
 }

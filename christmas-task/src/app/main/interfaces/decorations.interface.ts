@@ -7,5 +7,5 @@ export interface IDecorations {
   color: string,
   size: string,
   favourite: boolean,
-  createElement(): HTMLDivElement,
+  createElement(chosenItems: number[]): HTMLDivElement,
 }

@@ -9,6 +9,7 @@ import { ShapeFilter } from './filters/shapeFilter';
 import { SizeFilter } from './filters/sizeFilter';
 import { Sorter } from './sorter';
 import { FavouriteFilter } from './filters/favouriteFilter';
+import { PopupFavourite } from './popupFavourite';
 
 export class Decorations {
   private container: HTMLElement;
@@ -31,6 +32,10 @@ export class Decorations {
 
   allDecorations: IDecorations [];
 
+  chosenItems: number[];
+
+  maxNumberOfChosen: number;
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
@@ -44,6 +49,8 @@ export class Decorations {
     this.maxYear = 2020;
     this.chosenDecorations = [];
     this.allDecorations = [];
+    this.chosenItems = new Array(0);
+    this.maxNumberOfChosen = 20;
   }
 
   static createHeader(): HTMLDivElement {
@@ -72,7 +79,7 @@ export class Decorations {
     div.append(search);
     search.innerHTML = `
       <input type="search" class="input-search" autocomplete="off" autofocus placeholder="Поиск">
-      <div class="select"><span>0</span></div>
+      <div class="select"><span class="span">0</span></div>
     `;
     div.style.backgroundImage = 'url("./assets/background.png")';
     return div;
@@ -219,40 +226,59 @@ export class Decorations {
     } else {
       this.chosenDecorations = sizeFilter;
     }
-    Decorations.createChosenItemsContainer(this.chosenDecorations);
+    this.createChosenItemsContainer(this.chosenDecorations);
   }
 
-  static createChosenItemsContainer(chosenDecorations: IDecorations []): void {
+  createChosenItemsContainer(chosenDecorations: IDecorations []): void {
     const decorationItemsContainer = document.querySelector('.decoration_items_container') as HTMLDivElement;
     decorationItemsContainer.innerHTML = '';
-
     chosenDecorations.forEach((el) => {
       const decorationItem = el;
-      decorationItemsContainer.append(decorationItem.createElement());
+      decorationItemsContainer.append(decorationItem.createElement(this.chosenItems));
     });
   }
 
-  static createDecorationItemsContainer(): HTMLDivElement {
+  createDecorationItemsContainer(): HTMLDivElement {
     const decorationItemsContainer = document.createElement('div');
     decorationItemsContainer.classList.add('decoration_items_container');
-
     const aLLDecorations = Decorations.getAllDecorationsItem();
-
     aLLDecorations.forEach((el) => {
       const decorationItem = el;
-      decorationItemsContainer.append(decorationItem.createElement());
+      decorationItemsContainer.append(decorationItem.createElement(this.chosenItems));
     });
 
     return decorationItemsContainer;
   }
+
+  addToFavourite = (event: Event): void => {
+    const target = event.target as Element & { dataset: Record<string, string> };
+    const numb = Number(target.dataset.number);
+    const popup = document.querySelector('.popup') as HTMLDivElement;
+    const button = document.querySelector('.popup-button') as HTMLButtonElement;
+    const span = document.querySelector('.span') as HTMLElement;
+    button.addEventListener('click', () :void => { popup.style.transform = 'translateY(100%)'; });
+    if (target.classList.contains('imageFavourite') && this.chosenItems.includes(numb)) {
+      target.classList.remove('active');
+      this.chosenItems.splice(this.chosenItems.indexOf(numb), 1);
+    } else if (target.classList.contains('imageFavourite') && this.chosenItems.length < this.maxNumberOfChosen) {
+      this.chosenItems.push(numb);
+      target.classList.add('active');
+    } else if (target.classList.contains('imageFavourite') && this.chosenItems.length === this.maxNumberOfChosen) {
+      popup.style.transform = 'translateY(0)';
+    }
+    span.textContent = String(this.chosenItems.length);
+  };
 
   render(): HTMLElement {
     const header = Decorations.createHeader();
     document.body.append(header);
     const filtersContainer = Decorations.createFiltersContainer();
     this.container.append(filtersContainer);
-    const decorationContainer = Decorations.createDecorationItemsContainer();
+    const decorationContainer = this.createDecorationItemsContainer();
     this.container.append(decorationContainer);
+    const popup = new PopupFavourite();
+    const popupContainer = popup.render();
+    document.body.append(popupContainer);
 
     const shape = filtersContainer.querySelector('.filter_shape');
     shape?.addEventListener('click', this.selectShape);
@@ -285,6 +311,8 @@ export class Decorations {
     resetButton?.addEventListener('click', this.resetFilters);
 
     this.allDecorations = Decorations.getAllDecorationsItem();
+
+    decorationContainer.addEventListener('click', this.addToFavourite);
 
     return this.container;
   }
