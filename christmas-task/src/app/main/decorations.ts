@@ -1,3 +1,4 @@
+import { Searcher } from './searcher';
 import { YearFilter } from './filters/yearFilter';
 import { QuantityFilter } from './filters/quantityFilter';
 import data from '../../assets/data';
@@ -36,6 +37,8 @@ export class Decorations {
 
   maxNumberOfChosen: number;
 
+  search: string;
+
   constructor(id: string) {
     this.container = document.createElement('div');
     this.container.classList.add('decorations');
@@ -51,14 +54,15 @@ export class Decorations {
     this.allDecorations = [];
     this.chosenItems = new Array(0);
     this.maxNumberOfChosen = 20;
+    this.search = '';
   }
 
-  static createHeader(): HTMLDivElement {
+  createHeader(): HTMLDivElement {
     const div = document.createElement('div');
     div.classList.add('header');
+    div.style.backgroundImage = 'url("./assets/background.png")';
     const nav = document.createElement('nav');
     nav.classList.add('nav-bar');
-    div.append(nav);
 
     const logo = document.createElement('div');
     logo.classList.add('logo');
@@ -69,19 +73,18 @@ export class Decorations {
     treePage.classList.add('switch-tree-page');
     treePage.textContent = 'Ёлка';
 
+    const search = new Searcher();
+    const searchContainer = search.createSearcher();
+
+    const searchFilter = searchContainer.querySelector('.input-search');
+    searchFilter?.addEventListener('keyup', this.selectName);
+
+    div.append(nav);
     nav.append(logo);
     nav.append(toysPage);
     nav.append(treePage);
+    div.append(searchContainer);
 
-    const search = document.createElement('div');
-    search.classList.add('search-wrapper');
-
-    div.append(search);
-    search.innerHTML = `
-      <input type="search" class="input-search" autocomplete="off" autofocus placeholder="Поиск">
-      <div class="select"><span class="span">0</span></div>
-    `;
-    div.style.backgroundImage = 'url("./assets/background.png")';
     return div;
   }
 
@@ -126,6 +129,12 @@ export class Decorations {
     } else if (sorterInput.value === 'По дате по убыванию') {
       this.allDecorations = Sorter.sortYearDown(this.allDecorations);
     }
+    this.filterDecorationsItem();
+  };
+
+  selectName = () :void => {
+    const searchFilter = document.querySelector('.input-search') as HTMLInputElement;
+    this.search = searchFilter.value;
     this.filterDecorationsItem();
   };
 
@@ -215,7 +224,13 @@ export class Decorations {
   };
 
   filterDecorationsItem() :void {
-    const shapeFilter = ShapeFilter.filterShape(this.allDecorations, this.filterShape);
+    let searchFilter;
+    if (this.search !== '') {
+      searchFilter = Searcher.filterName(this.allDecorations, this.search);
+    } else {
+      searchFilter = this.allDecorations;
+    }
+    const shapeFilter = ShapeFilter.filterShape(searchFilter, this.filterShape);
     const quantityFilter = QuantityFilter.filterQuantity(shapeFilter, this.minQuantity, this.maxQuantity);
     const yearFilter = YearFilter.filterYear(quantityFilter, this.minYear, this.maxYear);
     const colorFilter = ColorFilter.filterColor(yearFilter, this.filterColor);
@@ -276,7 +291,7 @@ export class Decorations {
   };
 
   render(): HTMLElement {
-    const header = Decorations.createHeader();
+    const header = this.createHeader();
     document.body.append(header);
     const filtersContainer = Decorations.createFiltersContainer();
     this.container.append(filtersContainer);
