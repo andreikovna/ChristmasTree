@@ -285,6 +285,13 @@ export class Decorations {
     savings.setData(this.filterShape, this.filterColor, this.filterSize, this.chosenItems);
   }
 
+  resetSavings = (): void => {
+    localStorage.clear();
+    const sorter = document.querySelector('.sorter_input') as HTMLSelectElement;
+    sorter.value = '';
+    this.resetFilters();
+  };
+
   render(): HTMLElement {
     const header = this.createHeader();
     document.body.append(header);
@@ -326,6 +333,9 @@ export class Decorations {
 
     const resetButton = filtersContainer.querySelector('.reset_button');
     resetButton?.addEventListener('click', this.resetFilters);
+
+    const resetSavings = filtersContainer.querySelector('.reset_savings');
+    resetSavings?.addEventListener('click', this.resetSavings);
 
     decorationContainer.addEventListener('click', this.addToFavourite);
     this.allDecorations = Decorations.getAllDecorationsItem();

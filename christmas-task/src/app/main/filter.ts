@@ -63,8 +63,13 @@ export class Filter {
     const resetButton = document.createElement('button');
     resetButton.classList.add('reset_button');
     resetButton.textContent = 'Сбросить фильтры';
-
     this.container.append(resetButton);
+
+    const resetSavings = document.createElement('button');
+    resetSavings.classList.add('reset_savings');
+    resetSavings.textContent = 'Сбросить настройки';
+
+    this.container.append(resetSavings);
 
     return this.container;
   }

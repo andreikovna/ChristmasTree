@@ -30,4 +30,6 @@ export function yearSlider() :void {
 
   const resetButton = document.querySelector('.reset_button');
   resetButton?.addEventListener('click', resetFilters);
+  const resetSavings = document.querySelector('.reset_savings');
+  resetSavings?.addEventListener('click', resetFilters);
 }
