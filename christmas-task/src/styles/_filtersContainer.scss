@@ -73,6 +73,7 @@
   background-position: center;
   background-size: contain;
   margin: 0.5rem;
+  transition: 0.3s;
 }
 
 .filter_text{
@@ -123,6 +124,7 @@ height: 25px;
 border-radius: 5px;
 margin-right: 1rem;
 border: 4px solid transparent;
+transition: 0.3s;
 }
 
 .color:hover{
@@ -166,6 +168,7 @@ border: 4px solid transparent;
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 1.2rem;
+  transition: 0.3s;
 }
 
 .size:hover {
@@ -191,6 +194,12 @@ border: 4px solid transparent;
 .favourite-toys{
   text-transform: uppercase;
   margin: 1.5rem 0;
+  transition: 0.3s;
+}
+
+.favourite-toys:hover{
+  color:#8f8604;
+  cursor: pointer;
 }
 
 .container{
@@ -218,7 +227,7 @@ input[type="range"]::-ms-thumb {
   pointer-events: all;
 }
 
-.reset_button {
+.reset_button, .reset_savings {
   color: white;
   font-size: 1rem;
   line-height: 1.7rem;
@@ -230,11 +239,16 @@ input[type="range"]::-ms-thumb {
   );
   backdrop-filter: blur(31px);
   border-radius: 30px;
+  border: transparent 2px solid;
   margin: 0.2rem;
+  transition: 0.3s;
 }
 
-.reset_button:hover {
+.reset_button:hover, .reset_savings:hover {
   cursor: pointer;
   opacity: 0.6;
   color: $dark-green;
+  background-color: white;
+  border: $dark-green 2px solid;
+  box-sizing: border-box;
 }
