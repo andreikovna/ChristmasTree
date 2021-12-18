@@ -1,4 +1,6 @@
+import { savings } from '../savings';
 import { IDecorations } from '../interfaces/decorations.interface';
+import { isChecked } from '../utilities/checkFavouriteFilters';
 
 export class FavouriteFilter {
   container: HTMLDivElement;
@@ -9,13 +11,13 @@ export class FavouriteFilter {
   }
 
   createFavouriteFilter(): HTMLDivElement {
+    const checked = isChecked(savings.settings.favourite);
     this.container.innerHTML = `
-    <div class="favourite-toys">
-      <input type="checkbox" class="favourite" id="favourite-toys" name="favourite-toys" />
-      <label for="favourite-toys">Только любимые</label>
-    </div>
-    `;
-
+      <div class="favourite-toys">
+        <input type="checkbox" class="favourite" id="favourite-toys" name="favourite-toys" ${checked}/>
+        <label for="favourite-toys">Только любимые</label>
+      </div>
+      `;
     return this.container;
   }
 
