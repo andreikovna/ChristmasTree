@@ -41,7 +41,7 @@ export class ChristmasDecorationItem {
     div.setAttribute('data-number', this.num);
     div.innerHTML = `
     <h2 class="toy-name">${this.name}</h2>
-    <img class="toy-image" src="../../assets/toys/${this.num}.png">
+    <img class="toy-image" src="./assets/toys/${this.num}.png" alt="">
     <p class="toy-text" data-count="${this.count}">Количество: ${this.count}</p>
     <p class="toy-text" data-year="${this.year}">Год покупки: ${this.year}</p>
     <p class="toy-text" data-shape="${this.shape}">Форма: ${this.shape}</p>

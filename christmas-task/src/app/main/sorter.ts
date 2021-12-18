@@ -22,6 +22,7 @@ export class Sorter {
       </option>
       </select>
     `;
+
     return sorterContainer;
   }
 

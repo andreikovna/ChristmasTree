@@ -20,6 +20,7 @@ export class YearFilter {
         <input type="number" class="max-year" value="${max}" readonly>
       </div>
     `;
+
     return this.container;
   }
 

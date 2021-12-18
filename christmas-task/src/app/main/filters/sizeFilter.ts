@@ -17,7 +17,6 @@ export class SizeFilter {
     const filterTitles = document.createElement('p');
     filterTitles.classList.add('filter_titles');
     filterTitles.textContent = 'Размер';
-
     const containerFilters = document.createElement('div');
     containerFilters.classList.add('container-for-filters');
 

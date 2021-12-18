@@ -26,14 +26,6 @@ export class ColorFilter {
       containerFilters.append(container);
     });
 
-    // containerFilters.innerHTML = `
-    //   <div class="color white" data-color="белый"></div>
-    //   <div class="color yellow" data-color="желтый"></div>
-    //   <div class="color red" data-color="красный"></div>
-    //   <div class="color blue" data-color="синий"></div>
-    //   <div class="color green" data-color="зелёный"></div>
-    // `;
-
     this.container.append(filterTitles);
     this.container.append(containerFilters);
 

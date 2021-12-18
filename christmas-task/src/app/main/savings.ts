@@ -60,17 +60,6 @@ class Savings {
 
     localStorage.setItem('settings', JSON.stringify(this.settings));
   }
-
-  setDefault() {
-    this.settings.filterShape = [];
-    this.settings.filterColor = [];
-    this.settings.filterSize = [];
-    this.settings.minQuantity = 1;
-    this.settings.maxQuantity = 12;
-    this.settings.minYear = 1940;
-    this.settings.maxYear = 2020;
-    this.settings.chosenItems = [];
-  }
 }
 
 export const savings = new Savings(JSON.parse(localStorage.getItem('settings') || '{}'));

@@ -15,7 +15,6 @@ export class Searcher {
       <input type="search" class="input-search" autocomplete="off" autofocus placeholder="Поиск">
       <div class="select"><span class="span">${number}</span></div>
     `;
-
     return this.container;
   }
 
