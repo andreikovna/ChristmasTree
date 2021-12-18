@@ -6,14 +6,6 @@ export class PopupFavourite {
     this.container.classList.add('popup');
   }
 
-  showPopup() {
-    this.container.style.transform = 'translateY(0)';
-  }
-
-  hidePopup() {
-    this.container.style.transform = 'translateY(100%)';
-  }
-
   render(): HTMLElement {
     this.container.innerHTML = `
     <div class="popup-body">
