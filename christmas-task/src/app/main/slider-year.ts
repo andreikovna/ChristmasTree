@@ -1,10 +1,11 @@
 import noUiSlider from 'nouislider';
+import { savings } from './savings';
 
 export function yearSlider() :void {
   const sliderYear = document.getElementById('slider-year') as HTMLElement;
 
   const slider = noUiSlider.create(sliderYear, {
-    start: [1940, 2020],
+    start: [savings.settings.minYear, savings.settings.maxYear],
     connect: true,
     step: 1,
     range: {

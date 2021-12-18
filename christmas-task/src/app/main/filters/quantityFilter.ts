@@ -1,4 +1,5 @@
 import { IDecorations } from '../interfaces/decorations.interface';
+import { savings } from '../savings';
 
 export class QuantityFilter {
   container: HTMLDivElement;
@@ -9,12 +10,14 @@ export class QuantityFilter {
   }
 
   createQuantityFilter(): HTMLDivElement {
+    const min = savings.settings.minQuantity;
+    const max = savings.settings.maxQuantity;
     this.container.innerHTML = `
       <p class="filter_titles">Количество экземпляров</p>
       <div class="container-for-filters">
-        <input type="number" class="min-quantity" value="1" readonly>
+        <input type="number" class="min-quantity" value="${min}" readonly>
         <div id="slider-quantity" class="slider-quantity"></div>
-        <input type="number" class="max-quantity" value="12" readonly>
+        <input type="number" class="max-quantity" value="${max}" readonly>
       </div>
     `;
 

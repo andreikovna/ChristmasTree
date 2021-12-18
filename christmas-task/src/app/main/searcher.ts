@@ -1,3 +1,4 @@
+import { savings } from './savings';
 import { IDecorations } from './interfaces/decorations.interface';
 
 export class Searcher {
@@ -9,9 +10,10 @@ export class Searcher {
   }
 
   createSearcher(): HTMLDivElement {
+    const number = String(savings.settings.chosenItems.length);
     this.container.innerHTML = `
       <input type="search" class="input-search" autocomplete="off" autofocus placeholder="Поиск">
-      <div class="select"><span class="span">0</span></div>
+      <div class="select"><span class="span">${number}</span></div>
     `;
 
     return this.container;

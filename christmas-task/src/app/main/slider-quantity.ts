@@ -1,10 +1,11 @@
 import noUiSlider, { target } from 'nouislider';
+import { savings } from './savings';
 
 export function quantitySlider(): void {
   const sliderQuantity = <target>document.getElementById('slider-quantity');
 
   const slider = noUiSlider.create(sliderQuantity, {
-    start: [1, 12],
+    start: [savings.settings.minQuantity, savings.settings.maxQuantity],
     connect: true,
     step: 1,
     range: {

@@ -22,6 +22,20 @@ export class Filter {
     const uniqueShapeSet = new Set(shape);
     const uniqueShape = Array.from(uniqueShapeSet);
 
+    const size: string[] = [];
+    data.forEach((element) => {
+      size.push(element.size);
+    });
+    const uniqueSizeSet = new Set(size);
+    const uniqueSize = Array.from(uniqueSizeSet);
+
+    const color: string[] = [];
+    data.forEach((element) => {
+      color.push(element.color);
+    });
+    const uniqueColorSet = new Set(color);
+    const uniqueColor = Array.from(uniqueColorSet);
+
     const shapeFilter = new ShapeFilter(uniqueShape);
     const containerShape = shapeFilter.createShapeFilter();
     this.container.append(containerShape);
@@ -34,11 +48,11 @@ export class Filter {
     const containerYear = yearFilter.createYearFilter();
     this.container.append(containerYear);
 
-    const colorFilter = new ColorFilter();
+    const colorFilter = new ColorFilter(uniqueColor);
     const containerColor = colorFilter.createColorFilter();
     this.container.append(containerColor);
 
-    const sizeFilter = new SizeFilter();
+    const sizeFilter = new SizeFilter(uniqueSize);
     const containerSize = sizeFilter.createSizeFilter();
     this.container.append(containerSize);
 

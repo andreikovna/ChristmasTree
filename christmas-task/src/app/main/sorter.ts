@@ -8,16 +8,16 @@ export class Sorter {
       <p class='filter_titles'>Сортировать</p>
       <select class="sorter_input">
       <option hidden>Сортировать по ...</option>
-      <option value="По названию от 'A' до 'Я'" class="sorter_input_value">
+      <option value="ABC" class="sorter_input_value">
       По названию от 'A' до 'Я'
       </option>
-      <option value="По названию от 'Я' до 'А'" class="sorter_input_value">
+      <option value="BCA" class="sorter_input_value">
       По названию от 'Я' до 'А'
       </option>
-      <option value="По дате по возрастанию" class="sorter_input_value">
+      <option value="sortYearUp" class="sorter_input_value">
       По дате по возрастанию
       </option>
-      <option value="По дате по убыванию" class="sorter_input_value">
+      <option value="sortYearDown" class="sorter_input_value">
       По дате по убыванию
       </option>
       </select>

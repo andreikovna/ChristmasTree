@@ -1,3 +1,4 @@
+import { savings } from './savings';
 import img from '../../assets/png/rs_school_js.png';
 import { Decorations } from './decorations';
 import { quantitySlider } from './slider-quantity';
@@ -67,7 +68,7 @@ export class MainPage {
     logoRSS.innerHTML = `<img class='RSSlogo' src='${img}' alt ='logo'>`;
 
     const footerText = document.createElement('p');
-    footerText.textContent = 'by Daria Litvinova, 2021©';
+    footerText.textContent = 'by Daria Litvinova, 2021 ©';
 
     const githubAuthor = document.createElement('a');
     githubAuthor.classList.add('githubAuthor');
@@ -83,7 +84,7 @@ export class MainPage {
   }
 
   static openDecorations(): void {
-    const decorations = new Decorations('decorations');
+    const decorations = new Decorations(savings.settings);
     document.body.innerHTML = '';
     const decorationsPage = decorations.render();
     document.body.append(decorationsPage);

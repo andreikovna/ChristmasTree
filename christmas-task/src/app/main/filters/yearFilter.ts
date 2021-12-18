@@ -1,4 +1,5 @@
 import { IDecorations } from '../interfaces/decorations.interface';
+import { savings } from '../savings';
 
 export class YearFilter {
   container: HTMLDivElement;
@@ -9,12 +10,14 @@ export class YearFilter {
   }
 
   createYearFilter(): HTMLDivElement {
+    const min = savings.settings.minYear;
+    const max = savings.settings.maxYear;
     this.container.innerHTML = `
       <p class="filter_titles">Год приобретения</p>
       <div class="container-for-filters">
-        <input type="number" class="min-year" value="1940" readonly>
+        <input type="number" class="min-year" value="${min}" readonly>
         <div id="slider-year" class="slider-year"></div>
-        <input type="number" class="max-year" value="2020" readonly>
+        <input type="number" class="max-year" value="${max}" readonly>
       </div>
     `;
     return this.container;
