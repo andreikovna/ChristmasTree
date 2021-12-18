@@ -41,12 +41,12 @@ export class ChristmasDecorationItem {
     div.setAttribute('data-number', this.num);
     div.innerHTML = `
     <h2 class="toy-name">${this.name}</h2>
-    <img class="toy-image" src="../../assets/toys/${this.num}.png" data-number="${this.num}>
-    <p class="toy-text" data-count="${this.count} data-number="${this.num}">Количество: ${this.count}</p>
-    <p class="toy-text" data-year="${this.year}" data-number="${this.num}">Год покупки: ${this.year}</p>
-    <p class="toy-text" data-shape="${this.shape}" data-number="${this.num}">Форма: ${this.shape}</p>
-    <p class="toy-text" data-color="${this.color}" data-number="${this.num}">Цвет: ${this.color}</p>
-    <p class="toy-text" data-size="${this.size}" data-number="${this.num}">Размер: ${this.size}</p>
+    <img class="toy-image" src="../../assets/toys/${this.num}.png">
+    <p class="toy-text" data-count="${this.count}">Количество: ${this.count}</p>
+    <p class="toy-text" data-year="${this.year}">Год покупки: ${this.year}</p>
+    <p class="toy-text" data-shape="${this.shape}">Форма: ${this.shape}</p>
+    <p class="toy-text" data-color="${this.color}">Цвет: ${this.color}</p>
+    <p class="toy-text" data-size="${this.size}">Размер: ${this.size}</p>
     `;
     const favourite = document.createElement('p');
     favourite.classList.add('toy-text');
