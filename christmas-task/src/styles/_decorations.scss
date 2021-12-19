@@ -13,11 +13,14 @@ $dark-green: #192f2d;
 }
 
 .decoration_items_container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.decoration-wrapper{
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
-  height: auto;
-  margin: 0 auto;
+  margin: auto
 }
 
 .no-toys {
@@ -25,4 +28,15 @@ $dark-green: #192f2d;
   margin-left: 50px;
   color: white;
   font-size: 24px;
+}
+
+@media (max-width: 1300px) {
+  .filters_container{
+    width: 38%;
+  }
+
+  .decoration_items_container {
+    width: 62%;
+    margin: 0 auto;
+  }
 }

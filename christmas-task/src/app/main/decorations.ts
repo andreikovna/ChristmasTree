@@ -247,10 +247,13 @@ export class Decorations {
       `;
     } else {
       decorationItemsContainer.innerHTML = '';
+      const decorationWrapper = document.createElement('div');
+      decorationWrapper.classList.add('decoration-wrapper');
       chosenDecorations.forEach((el) => {
         const decorationItem = el;
-        decorationItemsContainer.append(decorationItem.createElement(this.chosenItems));
+        decorationWrapper.append(decorationItem.createElement(this.chosenItems));
       });
+      decorationItemsContainer.append(decorationWrapper);
     }
     this.savings();
   }

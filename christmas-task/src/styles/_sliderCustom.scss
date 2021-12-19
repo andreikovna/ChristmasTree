@@ -57,3 +57,19 @@
   width: 50%;
   margin: 0 1.5rem;
 }
+
+@media (max-width: 1100px) {
+  .slider-quantity,
+  .slider-year {
+    width: 40%;
+    margin: 0 1.5rem;
+  }
+}
+
+@media (max-width: 840px) {
+  .slider-quantity,
+  .slider-year {
+    width: 35%;
+    margin: 0 1rem;
+  }
+}
