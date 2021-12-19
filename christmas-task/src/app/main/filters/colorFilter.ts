@@ -1,6 +1,6 @@
 import { savings } from '../savings';
 import { IDecorations } from '../interfaces/decorations.interface';
-import { checkColorFilterData } from '../utilities/checkColorFilterStyle';
+import { checkFilterData } from '../utilities/checkFiltersStyles';
 
 export class ColorFilter {
   container: HTMLDivElement;
@@ -34,7 +34,7 @@ export class ColorFilter {
 
   static createContainersForColor(color: string) :HTMLDivElement {
     const div = document.createElement('div');
-    const activeStyle = checkColorFilterData(savings.settings.filterColor.includes(color));
+    const activeStyle = checkFilterData(savings.settings.filterColor.includes(color), 'color-active');
     div.innerHTML = `
       <div class="color ${color} ${activeStyle}" data-color="${color}"></div>
       `;

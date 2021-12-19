@@ -289,6 +289,9 @@ export class Decorations {
     localStorage.clear();
     const sorter = document.querySelector('.sorter_input') as HTMLSelectElement;
     sorter.value = '';
+    this.chosenItems = [];
+    const span = document.querySelector('.span') as HTMLElement;
+    span.textContent = String(this.chosenItems.length);
     this.resetFilters();
   };
 

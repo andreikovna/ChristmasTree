@@ -33,7 +33,7 @@ export class SizeFilter {
 
   static createContainersForSize(size: string) :HTMLDivElement {
     const div = document.createElement('div');
-    const activeStyle = checkFilterData(savings.settings.filterSize.includes(size));
+    const activeStyle = checkFilterData(savings.settings.filterSize.includes(size), 'active');
     div.innerHTML = `
       <div class="size ${size} ${activeStyle}" data-size="${size}"></div>
       `;

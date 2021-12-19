@@ -34,7 +34,7 @@ export class ShapeFilter {
   static createContainersForShape(shape: string) :HTMLDivElement {
     const shapeContainer = document.createElement('div');
     shapeContainer.classList.add('shape_container');
-    const activeStyle = checkFilterData(savings.settings.filterShape.includes(shape));
+    const activeStyle = checkFilterData(savings.settings.filterShape.includes(shape), 'active');
     shapeContainer.innerHTML = `
         <div class="img_shape ${shape} ${activeStyle}" data-shape="${shape}"></div>
         <p class="filter_text">${shape}</p>
