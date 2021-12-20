@@ -76,18 +76,20 @@ export class MainPage {
     githubAuthor.href = 'https://github.com/andreikovna';
     githubAuthor.target = '_blank';
 
-    div.append(logoRSS);
-    div.append(footerText);
-    div.append(githubAuthor);
+    div.append(logoRSS, footerText, githubAuthor);
 
     return div;
   }
 
   static openDecorations(): void {
-    const decorations = new Decorations(savings.settings);
     document.body.innerHTML = '';
+    const header = MainPage.createHeader();
+    header.style.backgroundImage = 'url("./assets/background.png")';
+    const decorations = new Decorations(savings.settings);
+    const searcher = decorations.createSearcher();
+    header.append(searcher);
     const decorationsPage = decorations.render();
-    document.body.append(decorationsPage);
+    document.body.append(header, decorationsPage);
     quantitySlider();
     yearSlider();
   }

@@ -7,7 +7,6 @@ export interface IData {
   color: string;
   size: string;
   favorite: boolean;
-  [key: string]: string | boolean;
 }
 
 const data: IData[] = [

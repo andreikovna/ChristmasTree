@@ -57,32 +57,14 @@ export class Decorations {
     this.search = '';
   }
 
-  createHeader(): HTMLDivElement {
-    const div = document.createElement('div');
-    div.classList.add('header');
-    div.style.backgroundImage = 'url("./assets/background.png")';
-    const nav = document.createElement('nav');
-    nav.classList.add('nav-bar');
-
-    const logo = document.createElement('div');
-    logo.classList.add('logo');
-    const toysPage = document.createElement('div');
-    toysPage.classList.add('switch-toy-page');
-    toysPage.textContent = 'Игрушки';
-    const treePage = document.createElement('div');
-    treePage.classList.add('switch-tree-page');
-    treePage.textContent = 'Ёлка';
-
+  createSearcher(): HTMLDivElement {
     const search = new Searcher();
     const searchContainer = search.createSearcher();
 
     const searchFilter = searchContainer.querySelector('.input-search');
     searchFilter?.addEventListener('keyup', this.selectName);
 
-    div.append(...[nav, searchContainer]);
-    nav.append(...[logo, toysPage, treePage]);
-
-    return div;
+    return searchContainer;
   }
 
   static createFiltersContainer(): HTMLDivElement {
@@ -303,13 +285,12 @@ export class Decorations {
   };
 
   render(): HTMLElement {
-    const header = this.createHeader();
     const filtersContainer = Decorations.createFiltersContainer();
     const decorationContainer = Decorations.createDecorationItemsContainer();
     this.container.append(filtersContainer, decorationContainer);
     const popup = new PopupFavourite();
     const popupContainer = popup.render();
-    document.body.append(header, popupContainer);
+    document.body.append(popupContainer);
 
     const shape = filtersContainer.querySelector('.filter_shape');
     const color = filtersContainer.querySelector('.filter_color');
