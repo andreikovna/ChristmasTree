@@ -1,3 +1,4 @@
+import { TreePage } from './treePage';
 import { savings } from './savings';
 import img from '../../assets/png/rs_school_js.png';
 import { Decorations } from './decorations';
@@ -34,11 +35,10 @@ export class MainPage {
     treePage.classList.add('switch-tree-page');
     treePage.textContent = 'Ёлка';
 
-    nav.append(logo);
-    nav.append(toysPage);
-    nav.append(treePage);
+    nav.append(...[logo, toysPage, treePage]);
 
     toysPage.addEventListener('click', MainPage.openDecorations, { once: true });
+    treePage.addEventListener('click', MainPage.openTree, { once: true });
 
     return div;
   }
@@ -90,6 +90,14 @@ export class MainPage {
     document.body.append(decorationsPage);
     quantitySlider();
     yearSlider();
+  }
+
+  static openTree(): void {
+    const tree = new TreePage();
+    document.body.innerHTML = '';
+    const header = MainPage.createHeader();
+    const treePage = tree.render();
+    document.body.append(header, treePage);
   }
 
   render(): HTMLElement {
