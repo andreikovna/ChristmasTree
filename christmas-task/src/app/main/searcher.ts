@@ -20,7 +20,7 @@ export class Searcher {
 
   static filterName(items: IDecorations [], text: string) : IDecorations[] {
     const pattern = text.split(' ').map((elem) => `(.*${elem})`).join('');
-    const regex = new RegExp(pattern, 'g');
+    const regex = new RegExp(pattern.toLowerCase(), 'g');
     const filteredItems = items.filter((item) => item.name.toLowerCase().match(regex));
     return filteredItems;
   }
