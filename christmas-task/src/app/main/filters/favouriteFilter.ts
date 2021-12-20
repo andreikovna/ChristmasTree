@@ -11,7 +11,7 @@ export class FavouriteFilter {
   }
 
   createFavouriteFilter(): HTMLDivElement {
-    const checked = isChecked(savings.settings.favourite);
+    const checked = isChecked(savings.settings.favorite);
     this.container.innerHTML = `
       <div class="favourite-toys">
         <input type="checkbox" class="favourite" id="favourite-toys" name="favourite-toys" ${checked}/>
@@ -21,8 +21,8 @@ export class FavouriteFilter {
     return this.container;
   }
 
-  static filterFavourite(items: IDecorations[]) : IDecorations[] {
-    const filteredItems = items.filter((item) => item.favourite === true);
+  static filterFavorite(items: IDecorations[]): IDecorations[] {
+    const filteredItems = items.filter((item) => item.favorite === true);
     return filteredItems;
   }
 }

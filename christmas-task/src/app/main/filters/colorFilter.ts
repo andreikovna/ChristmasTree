@@ -5,9 +5,9 @@ import { checkFilterData } from '../utilities/checkFiltersStyles';
 export class ColorFilter {
   container: HTMLDivElement;
 
-  colorContainer: string [];
+  colorContainer: string[];
 
-  constructor(colorContainer: string []) {
+  constructor(colorContainer: string[]) {
     this.container = document.createElement('div');
     this.container.classList.add('filter_color');
     this.colorContainer = colorContainer;
@@ -32,16 +32,19 @@ export class ColorFilter {
     return this.container;
   }
 
-  static createContainersForColor(color: string) :HTMLDivElement {
+  static createContainersForColor(color: string): HTMLDivElement {
     const div = document.createElement('div');
-    const activeStyle = checkFilterData(savings.settings.filterColor.includes(color), 'color-active');
+    const activeStyle = checkFilterData(
+      savings.settings.filterColor.includes(color),
+      'color-active',
+    );
     div.innerHTML = `
       <div class="color ${color} ${activeStyle}" data-color="${color}"></div>
       `;
     return div;
   }
 
-  static filterColor(items: IDecorations[], color: string []) : IDecorations[] {
+  static filterColor(items: IDecorations[], color: string[]): IDecorations[] {
     let colorArray = items;
     colorArray = colorArray.filter((item) => {
       if (color.length > 0) {

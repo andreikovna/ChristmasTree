@@ -16,11 +16,11 @@ import { savings, ISavings } from './savings';
 export class Decorations {
   private container: HTMLElement;
 
-  filterShape: string [];
+  filterShape: string[];
 
-  filterColor: string [];
+  filterColor: string[];
 
-  filterSize: string [];
+  filterSize: string[];
 
   minQuantity: number;
 
@@ -30,9 +30,9 @@ export class Decorations {
 
   maxYear: number;
 
-  chosenDecorations: IDecorations [];
+  chosenDecorations: IDecorations[];
 
-  allDecorations: IDecorations [];
+  allDecorations: IDecorations[];
 
   chosenItems: number[];
 
@@ -79,11 +79,8 @@ export class Decorations {
     const searchFilter = searchContainer.querySelector('.input-search');
     searchFilter?.addEventListener('keyup', this.selectName);
 
-    div.append(nav);
-    nav.append(logo);
-    nav.append(toysPage);
-    nav.append(treePage);
-    div.append(searchContainer);
+    div.append(...[nav, searchContainer]);
+    nav.append(...[logo, toysPage, treePage]);
 
     return div;
   }
@@ -99,7 +96,7 @@ export class Decorations {
     return filtersContainer;
   }
 
-  static getAllDecorationsItem() :IDecorations[] {
+  static getAllDecorationsItem(): IDecorations[] {
     const allDecorations: IDecorations[] = [];
     data.forEach((el) => {
       const decorationItem = new ChristmasDecorationItem(
@@ -117,13 +114,15 @@ export class Decorations {
     return allDecorations;
   }
 
-  sortItems = () :void => {
+  sortItems = (): void => {
     this.allDecorations = Decorations.getAllDecorationsItem();
-    const sorterInput = document.querySelector('.sorter_input') as HTMLSelectElement;
-    if (sorterInput.value === 'ABC') {
-      this.allDecorations = Sorter.sortABC(this.allDecorations);
-    } else if (sorterInput.value === 'BCA') {
-      this.allDecorations = Sorter.sortCBA(this.allDecorations);
+    const sorterInput = document.querySelector(
+      '.sorter_input',
+    ) as HTMLSelectElement;
+    if (sorterInput.value === 'ASC') {
+      this.allDecorations = Sorter.sortASC(this.allDecorations);
+    } else if (sorterInput.value === 'DESC') {
+      this.allDecorations = Sorter.sortDESC(this.allDecorations);
     } else if (sorterInput.value === 'sortYearUp') {
       this.allDecorations = Sorter.sortYearUp(this.allDecorations);
     } else if (sorterInput.value === 'sortYearDown') {
@@ -132,14 +131,16 @@ export class Decorations {
     this.filterDecorationsItem();
   };
 
-  selectName = () :void => {
+  selectName = (): void => {
     const searchFilter = document.querySelector('.input-search') as HTMLInputElement;
     this.search = searchFilter.value;
     this.sortItems();
   };
 
-  selectShape = (event: Event) :void => {
-    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+  selectShape = (event: Event): void => {
+    const target = event.target as HTMLElement & {
+      dataset: Record<string, string>;
+    };
     const { shape } = target.dataset;
     if (this.filterShape.includes(shape)) {
       target.classList.remove('active');
@@ -151,8 +152,10 @@ export class Decorations {
     this.sortItems();
   };
 
-  selectColor = (event: Event) :void => {
-    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+  selectColor = (event: Event): void => {
+    const target = event.target as HTMLElement & {
+      dataset: Record<string, string>;
+    };
     const { color } = target.dataset;
     if (this.filterColor.includes(color)) {
       target.classList.remove('color-active');
@@ -164,8 +167,10 @@ export class Decorations {
     this.sortItems();
   };
 
-  selectSize = (event: Event) :void => {
-    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+  selectSize = (event: Event): void => {
+    const target = event.target as HTMLElement & {
+      dataset: Record<string, string>;
+    };
     const { size } = target.dataset;
     if (this.filterSize.includes(size)) {
       target.classList.remove('active');
@@ -177,7 +182,7 @@ export class Decorations {
     this.sortItems();
   };
 
-  selectQuantity = () :void => {
+  selectQuantity = (): void => {
     const minQuantity = document.querySelector('.min-quantity') as HTMLInputElement;
     this.minQuantity = Number(minQuantity.value);
     const maxQuantity = document.querySelector('.max-quantity') as HTMLInputElement;
@@ -185,7 +190,7 @@ export class Decorations {
     this.sortItems();
   };
 
-  selectYear = () :void => {
+  selectYear = (): void => {
     const minYear = document.querySelector('.min-year') as HTMLInputElement;
     this.minYear = Number(minYear.value);
     const maxYear = document.querySelector('.max-year') as HTMLInputElement;
@@ -193,11 +198,11 @@ export class Decorations {
     this.sortItems();
   };
 
-  selectFavourite = () :void => {
+  selectFavourite = (): void => {
     this.sortItems();
   };
 
-  resetFilters = () :void => {
+  resetFilters = (): void => {
     const shapes = document.querySelectorAll('.img_shape');
     shapes.forEach((element) => {
       element.classList.remove('active');
@@ -217,16 +222,15 @@ export class Decorations {
     this.maxQuantity = 12;
     this.minYear = 1940;
     this.maxYear = 2020;
-    const favourite = document.querySelector('.favourite') as HTMLInputElement;
-    favourite.checked = false;
+    const favorite = document.querySelector('.favourite') as HTMLInputElement;
+    favorite.checked = false;
     this.sortItems();
   };
 
-  filterDecorationsItem() :void {
+  filterDecorationsItem(): void {
+    this.chosenDecorations = this.allDecorations;
     if (this.search !== '') {
       this.chosenDecorations = Searcher.filterName(this.allDecorations, this.search);
-    } else {
-      this.chosenDecorations = this.allDecorations;
     }
     this.chosenDecorations = ShapeFilter.filterShape(this.chosenDecorations, this.filterShape);
     this.chosenDecorations = QuantityFilter.filterQuantity(this.chosenDecorations, this.minQuantity, this.maxQuantity);
@@ -234,17 +238,15 @@ export class Decorations {
     this.chosenDecorations = ColorFilter.filterColor(this.chosenDecorations, this.filterColor);
     this.chosenDecorations = SizeFilter.filterSize(this.chosenDecorations, this.filterSize);
     if ((document.querySelector('.favourite') as HTMLInputElement).checked) {
-      this.chosenDecorations = FavouriteFilter.filterFavourite(this.chosenDecorations);
+      this.chosenDecorations = FavouriteFilter.filterFavorite(this.chosenDecorations);
     }
     this.createChosenItemsContainer(this.chosenDecorations);
   }
 
-  createChosenItemsContainer(chosenDecorations: IDecorations []): void {
+  createChosenItemsContainer(chosenDecorations: IDecorations[]): void {
     const decorationItemsContainer = document.querySelector('.decoration_items_container') as HTMLDivElement;
     if (this.chosenDecorations.length === 0) {
-      decorationItemsContainer.innerHTML = `
-      <p class="no-toys">Извините, совпадений не обнаружено</p>
-      `;
+      decorationItemsContainer.innerHTML = '<p class="no-toys">Извините, совпадений не обнаружено</p>';
     } else {
       decorationItemsContainer.innerHTML = '';
       const decorationWrapper = document.createElement('div');
@@ -265,12 +267,14 @@ export class Decorations {
   }
 
   addToFavourite = (event: Event): void => {
-    const target = event.target as Element & { dataset: Record<string, string> };
+    const target = event.target as Element & {
+      dataset: Record<string, string>;
+    };
     const numb = Number(target.dataset.number);
     const popup = document.querySelector('.popup') as HTMLDivElement;
     const button = document.querySelector('.popup-button') as HTMLButtonElement;
     const span = document.querySelector('.span') as HTMLElement;
-    button.addEventListener('click', () :void => { popup.style.transform = 'translateY(100%)'; });
+    button.addEventListener('click', (): void => { popup.style.transform = 'translateY(100%)'; });
     if (target.classList.contains('imageFavourite') && this.chosenItems.includes(numb)) {
       target.classList.remove('active');
       this.chosenItems.splice(this.chosenItems.indexOf(numb), 1);
@@ -300,51 +304,40 @@ export class Decorations {
 
   render(): HTMLElement {
     const header = this.createHeader();
-    document.body.append(header);
     const filtersContainer = Decorations.createFiltersContainer();
-    this.container.append(filtersContainer);
     const decorationContainer = Decorations.createDecorationItemsContainer();
-    this.container.append(decorationContainer);
+    this.container.append(filtersContainer, decorationContainer);
     const popup = new PopupFavourite();
     const popupContainer = popup.render();
-    document.body.append(popupContainer);
+    document.body.append(header, popupContainer);
 
     const shape = filtersContainer.querySelector('.filter_shape');
-    shape?.addEventListener('click', this.selectShape);
-
     const color = filtersContainer.querySelector('.filter_color');
-    color?.addEventListener('click', this.selectColor);
-
     const size = filtersContainer.querySelector('.filter_size');
-    size?.addEventListener('click', this.selectSize);
-
     const favourite = filtersContainer.querySelector('.favourite');
-    favourite?.addEventListener('change', this.selectFavourite);
-
     const minQuantity = filtersContainer.querySelector('.min-quantity');
-    minQuantity?.addEventListener('change', this.selectQuantity);
-
     const maxQuantity = filtersContainer.querySelector('.max-quantity');
-    maxQuantity?.addEventListener('change', this.selectQuantity);
-
     const minYear = filtersContainer.querySelector('.min-year');
-    minYear?.addEventListener('change', this.selectYear);
-
     const maxYear = filtersContainer.querySelector('.max-year');
-    maxYear?.addEventListener('change', this.selectYear);
-
     const sorter = filtersContainer.querySelector('.sorter_input') as HTMLSelectElement;
-    sorter.value = savings.settings.sorter;
-    sorter?.addEventListener('change', this.sortItems);
-
     const resetButton = filtersContainer.querySelector('.reset_button');
-    resetButton?.addEventListener('click', this.resetFilters);
-
     const resetSavings = filtersContainer.querySelector('.reset_savings');
+
+    color?.addEventListener('click', this.selectColor);
+    shape?.addEventListener('click', this.selectShape);
+    size?.addEventListener('click', this.selectSize);
+    favourite?.addEventListener('change', this.selectFavourite);
+    minQuantity?.addEventListener('change', this.selectQuantity);
+    maxQuantity?.addEventListener('change', this.selectQuantity);
+    minYear?.addEventListener('change', this.selectYear);
+    maxYear?.addEventListener('change', this.selectYear);
+    sorter?.addEventListener('change', this.sortItems);
+    resetButton?.addEventListener('click', this.resetFilters);
     resetSavings?.addEventListener('click', this.resetSavings);
 
     decorationContainer.addEventListener('click', this.addToFavourite);
     this.allDecorations = Decorations.getAllDecorationsItem();
+    sorter.value = savings.settings.sorter;
 
     return this.container;
   }

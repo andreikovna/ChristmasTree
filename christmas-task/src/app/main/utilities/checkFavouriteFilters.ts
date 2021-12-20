@@ -1,4 +1,4 @@
-export function isChecked(expression: boolean) :string {
+export function isChecked(expression: boolean): string {
   if (expression === true) {
     return 'checked';
   }

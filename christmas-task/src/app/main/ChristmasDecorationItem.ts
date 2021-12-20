@@ -13,7 +13,7 @@ export class ChristmasDecorationItem {
 
   size: string;
 
-  favourite: boolean;
+  favorite: boolean;
 
   constructor(
     num: string,
@@ -23,7 +23,7 @@ export class ChristmasDecorationItem {
     shape: string,
     color: string,
     size: string,
-    favourite: boolean,
+    favorite: boolean,
   ) {
     this.num = num;
     this.name = name;
@@ -32,7 +32,7 @@ export class ChristmasDecorationItem {
     this.shape = shape;
     this.color = color;
     this.size = size;
-    this.favourite = favourite;
+    this.favorite = favorite;
   }
 
   createElement(chosenItems: number[]): HTMLDivElement {
@@ -48,24 +48,24 @@ export class ChristmasDecorationItem {
     <p class="toy-text" data-color="${this.color}">Цвет: ${this.color}</p>
     <p class="toy-text" data-size="${this.size}">Размер: ${this.size}</p>
     `;
-    const favourite = document.createElement('p');
-    favourite.classList.add('toy-text');
-    const dataAttribute = this.favourite.toString();
-    favourite.setAttribute('data-favourite', dataAttribute);
-    if (this.favourite === true) {
-      favourite.textContent = 'Любимая: да';
+    const favorite = document.createElement('p');
+    favorite.classList.add('toy-text');
+    const dataAttribute = this.favorite.toString();
+    favorite.setAttribute('data-favourite', dataAttribute);
+    if (this.favorite === true) {
+      favorite.textContent = 'Любимая: да';
     } else {
-      favourite.textContent = 'Любимая: нет';
+      favorite.textContent = 'Любимая: нет';
     }
-    const imageFavourite = document.createElement('div');
-    imageFavourite.classList.add('imageFavourite');
+    const imageFavorite = document.createElement('div');
+    imageFavorite.classList.add('imageFavourite');
     if (chosenItems.includes(Number(this.num))) {
-      imageFavourite.classList.add('active');
+      imageFavorite.classList.add('active');
     }
-    imageFavourite.setAttribute('data-number', this.num);
+    imageFavorite.setAttribute('data-number', this.num);
 
-    div.append(favourite);
-    div.append(imageFavourite);
+    div.append(favorite);
+    div.append(imageFavorite);
 
     return div;
   }

@@ -5,9 +5,9 @@ import { checkFilterData } from '../utilities/checkFiltersStyles';
 export class SizeFilter {
   container: HTMLDivElement;
 
-  sizeContainer: string [];
+  sizeContainer: string[];
 
-  constructor(sizeContainer: string []) {
+  constructor(sizeContainer: string[]) {
     this.container = document.createElement('div');
     this.container.classList.add('filter_size');
     this.sizeContainer = sizeContainer;
@@ -31,16 +31,19 @@ export class SizeFilter {
     return this.container;
   }
 
-  static createContainersForSize(size: string) :HTMLDivElement {
+  static createContainersForSize(size: string): HTMLDivElement {
     const div = document.createElement('div');
-    const activeStyle = checkFilterData(savings.settings.filterSize.includes(size), 'active');
+    const activeStyle = checkFilterData(
+      savings.settings.filterSize.includes(size),
+      'active',
+    );
     div.innerHTML = `
       <div class="size ${size} ${activeStyle}" data-size="${size}"></div>
       `;
     return div;
   }
 
-  static filterSize(items: IDecorations[], size: string []) : IDecorations[] {
+  static filterSize(items: IDecorations[], size: string[]): IDecorations[] {
     let sizeArray = items;
     sizeArray = sizeArray.filter((item) => {
       if (size.length > 0) {

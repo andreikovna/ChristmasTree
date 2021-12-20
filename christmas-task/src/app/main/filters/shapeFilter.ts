@@ -5,9 +5,9 @@ import { checkFilterData } from '../utilities/checkFiltersStyles';
 export class ShapeFilter {
   container: HTMLDivElement;
 
-  shapeContainer: string [];
+  shapeContainer: string[];
 
-  constructor(shapeContainer: string []) {
+  constructor(shapeContainer: string[]) {
     this.container = document.createElement('div');
     this.container.classList.add('filter_shape');
     this.shapeContainer = shapeContainer;
@@ -31,10 +31,13 @@ export class ShapeFilter {
     return this.container;
   }
 
-  static createContainersForShape(shape: string) :HTMLDivElement {
+  static createContainersForShape(shape: string): HTMLDivElement {
     const shapeContainer = document.createElement('div');
     shapeContainer.classList.add('shape_container');
-    const activeStyle = checkFilterData(savings.settings.filterShape.includes(shape), 'active');
+    const activeStyle = checkFilterData(
+      savings.settings.filterShape.includes(shape),
+      'active',
+    );
     shapeContainer.innerHTML = `
         <div class="img_shape ${shape} ${activeStyle}" data-shape="${shape}"></div>
         <p class="filter_text">${shape}</p>
@@ -42,7 +45,7 @@ export class ShapeFilter {
     return shapeContainer;
   }
 
-  static filterShape(items: IDecorations[], shape: string []) : IDecorations[] {
+  static filterShape(items: IDecorations[], shape: string[]): IDecorations[] {
     let shapeArray = items;
     shapeArray = shapeArray.filter((item) => {
       if (shape.length > 0) {

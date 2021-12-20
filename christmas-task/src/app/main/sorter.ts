@@ -8,10 +8,10 @@ export class Sorter {
       <p class='filter_titles'>Сортировать</p>
       <select class="sorter_input">
       <option hidden>Сортировать по ...</option>
-      <option value="ABC" class="sorter_input_value">
+      <option value="ASC" class="sorter_input_value">
       По названию от 'A' до 'Я'
       </option>
-      <option value="BCA" class="sorter_input_value">
+      <option value="DESC" class="sorter_input_value">
       По названию от 'Я' до 'А'
       </option>
       <option value="sortYearUp" class="sorter_input_value">
@@ -26,7 +26,7 @@ export class Sorter {
     return sorterContainer;
   }
 
-  static sortABC(items: IDecorations[]) :IDecorations[] {
+  static sortASC(items: IDecorations[]) :IDecorations[] {
     const sortedItems = items.sort((a, b) => {
       if (a.name > b.name) {
         return 1;
@@ -39,7 +39,7 @@ export class Sorter {
     return sortedItems;
   }
 
-  static sortCBA(items: IDecorations[]) :IDecorations[] {
+  static sortDESC(items: IDecorations[]) :IDecorations[] {
     const sortedItems = items.sort((a, b) => {
       if (a.name < b.name) {
         return 1;

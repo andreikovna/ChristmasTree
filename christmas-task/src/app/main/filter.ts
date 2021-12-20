@@ -5,6 +5,8 @@ import data from '../../assets/data';
 import { ShapeFilter } from './filters/shapeFilter';
 import { SizeFilter } from './filters/sizeFilter';
 import { FavouriteFilter } from './filters/favouriteFilter';
+import { Button } from './utilities/button';
+import { createPropertySet } from './utilities/createPropertySet';
 
 export class Filter {
   container: HTMLDivElement;
@@ -15,61 +17,36 @@ export class Filter {
   }
 
   createFilter(): HTMLDivElement {
-    const shape: string[] = [];
-    data.forEach((element) => {
-      shape.push(element.shape);
-    });
-    const uniqueShapeSet = new Set(shape);
-    const uniqueShape = Array.from(uniqueShapeSet);
+    const shape = createPropertySet('shape');
+    const size = createPropertySet('size');
+    const color = createPropertySet('color');
 
-    const size: string[] = [];
-    data.forEach((element) => {
-      size.push(element.size);
-    });
-    const uniqueSizeSet = new Set(size);
-    const uniqueSize = Array.from(uniqueSizeSet);
-
-    const color: string[] = [];
-    data.forEach((element) => {
-      color.push(element.color);
-    });
-    const uniqueColorSet = new Set(color);
-    const uniqueColor = Array.from(uniqueColorSet);
-
-    const shapeFilter = new ShapeFilter(uniqueShape);
+    const shapeFilter = new ShapeFilter(shape);
     const containerShape = shapeFilter.createShapeFilter();
-    this.container.append(containerShape);
 
     const quantityFilter = new QuantityFilter();
     const containerQuantity = quantityFilter.createQuantityFilter();
-    this.container.append(containerQuantity);
 
     const yearFilter = new YearFilter();
     const containerYear = yearFilter.createYearFilter();
-    this.container.append(containerYear);
 
-    const colorFilter = new ColorFilter(uniqueColor);
+    const colorFilter = new ColorFilter(color);
     const containerColor = colorFilter.createColorFilter();
-    this.container.append(containerColor);
 
-    const sizeFilter = new SizeFilter(uniqueSize);
+    const sizeFilter = new SizeFilter(size);
     const containerSize = sizeFilter.createSizeFilter();
-    this.container.append(containerSize);
 
     const favouriteFilter = new FavouriteFilter();
     const containerfavourite = favouriteFilter.createFavouriteFilter();
-    this.container.append(containerfavourite);
 
-    const resetButton = document.createElement('button');
-    resetButton.classList.add('reset_button');
-    resetButton.textContent = 'Сбросить фильтры';
-    this.container.append(resetButton);
+    const resetInstance = new Button();
+    const resetButton = resetInstance.createButton('reset_button', 'Сбросить фильтры');
 
-    const resetSavings = document.createElement('button');
-    resetSavings.classList.add('reset_savings');
-    resetSavings.textContent = 'Сбросить настройки';
+    const buttonResetSavingsInstance = new Button();
+    const resetSavings = buttonResetSavingsInstance.createButton('reset_savings', 'Сбросить настройки');
 
-    this.container.append(resetSavings);
+    this.container.append(...[containerShape, containerQuantity, containerYear, containerColor,
+      containerSize, containerfavourite, resetButton, resetSavings]);
 
     return this.container;
   }

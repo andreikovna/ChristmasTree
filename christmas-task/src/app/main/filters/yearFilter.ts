@@ -24,8 +24,14 @@ export class YearFilter {
     return this.container;
   }
 
-  static filterYear(items: IDecorations[], min: number, max: number) : IDecorations[] {
-    const filteredItems = items.filter((item) => Number(item.year) >= min && Number(item.year) <= max);
+  static filterYear(
+    items: IDecorations[],
+    min: number,
+    max: number,
+  ): IDecorations[] {
+    const filteredItems = items.filter(
+      (item) => Number(item.year) >= min && Number(item.year) <= max,
+    );
     return filteredItems;
   }
 }

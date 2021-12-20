@@ -24,8 +24,14 @@ export class QuantityFilter {
     return this.container;
   }
 
-  static filterQuantity(items: IDecorations[], min: number, max: number) : IDecorations[] {
-    const filteredItems = items.filter((item) => Number(item.count) >= min && Number(item.count) <= max);
+  static filterQuantity(
+    items: IDecorations[],
+    min: number,
+    max: number,
+  ): IDecorations[] {
+    const filteredItems = items.filter(
+      (item) => Number(item.count) >= min && Number(item.count) <= max,
+    );
     return filteredItems;
   }
 }

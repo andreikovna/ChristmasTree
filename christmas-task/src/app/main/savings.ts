@@ -7,7 +7,7 @@ export interface ISavings {
   minYear: number;
   maxYear: number;
   chosenItems: number[];
-  favourite: boolean;
+  favorite: boolean;
   sorter: string;
 }
 class Savings {
@@ -20,7 +20,7 @@ class Savings {
     minYear: number;
     maxYear: number;
     chosenItems: number[];
-    favourite: boolean;
+    favorite: boolean;
     sorter: string;
   };
 
@@ -34,7 +34,7 @@ class Savings {
       minYear: localStorageData?.minYear ?? 1940,
       maxYear: localStorageData?.maxYear ?? 2020,
       chosenItems: localStorageData?.chosenItems ?? [],
-      favourite: localStorageData?.favourite ?? false,
+      favorite: localStorageData?.favorite ?? false,
       sorter: localStorageData?.sorter ?? 'Сортировать по..',
     };
   }
@@ -44,7 +44,7 @@ class Savings {
     const inputQuantityMax = document.querySelector('.max-quantity') as HTMLInputElement;
     const inputYearMin = document.querySelector('.min-year') as HTMLInputElement;
     const inputYearMax = document.querySelector('.max-year') as HTMLInputElement;
-    const favouriteCheck = document.querySelector('.favourite') as HTMLInputElement;
+    const favoriteCheck = document.querySelector('.favourite') as HTMLInputElement;
     const sorter = document.querySelector('.sorter_input') as HTMLSelectElement;
 
     this.settings.minQuantity = Number(inputQuantityMin.value);
@@ -55,7 +55,7 @@ class Savings {
     this.settings.filterColor = filterColor;
     this.settings.filterSize = filterSize;
     this.settings.chosenItems = chosenItems;
-    this.settings.favourite = favouriteCheck.checked;
+    this.settings.favorite = favoriteCheck.checked;
     this.settings.sorter = sorter.value;
 
     localStorage.setItem('settings', JSON.stringify(this.settings));
