@@ -1,6 +1,5 @@
 import { TreePage } from './treePage';
 import { savings } from './savings';
-import img from '../../assets/png/rs_school_js.png';
 import { Decorations } from './decorations';
 import { quantitySlider } from './slider-quantity';
 import { yearSlider } from './slider-year';
@@ -65,7 +64,7 @@ export class MainPage {
     logoRSS.classList.add('RSS');
     logoRSS.href = 'https://rs.school/';
     logoRSS.target = '_blank';
-    logoRSS.innerHTML = `<img class='RSSlogo' src='${img}' alt ='logo'>`;
+    logoRSS.innerHTML = '<img class="RSSlogo" src="./assets/png/rs_school_js.png" alt ="logo">';
 
     const footerText = document.createElement('p');
     footerText.textContent = 'by Daria Litvinova, 2021 ©';
@@ -85,6 +84,8 @@ export class MainPage {
     document.body.innerHTML = '';
     const header = MainPage.createHeader();
     header.style.backgroundImage = 'url("./assets/background.png")';
+    const logo = header.querySelector('.logo');
+    logo?.addEventListener('click', MainPage.openMain);
     const decorations = new Decorations(savings.settings);
     const searcher = decorations.createSearcher();
     header.append(searcher);
@@ -94,12 +95,28 @@ export class MainPage {
     yearSlider();
   }
 
+  static openMain(): void {
+    document.body.innerHTML = '';
+    const main = document.createElement('div');
+    main.classList.add('main');
+    const title = MainPage.createTitle(MainPage.TextObject.MainTitle);
+    const button = MainPage.createButtonStart(MainPage.TextObject.buttonText);
+    main.append(title, button);
+    const header = MainPage.createHeader();
+    const footer = MainPage.createFooter();
+    button.addEventListener('click', MainPage.openDecorations, { once: true });
+    document.body.append(header, main, footer);
+  }
+
   static openTree(): void {
     const tree = new TreePage();
     document.body.innerHTML = '';
     const header = MainPage.createHeader();
+    const logo = header.querySelector('.logo');
+    logo?.addEventListener('click', MainPage.openMain);
+    const footer = MainPage.createFooter();
     const treePage = tree.render();
-    document.body.append(header, treePage);
+    document.body.append(header, treePage, footer);
   }
 
   render(): HTMLElement {

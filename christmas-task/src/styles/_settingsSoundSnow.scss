@@ -1,0 +1,21 @@
+.settings-wrapper {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.sound-settings,
+.snow-settings {
+  width: 36px;
+  height: 36px;
+  background-size: contain;
+  margin-right: 1.5rem;;
+}
+
+.sound-settings {
+  background-image: url(./assets/svg/audio.svg);
+}
+
+.snow-settings {
+  background-image: url(./assets/svg/snow.svg);
+}

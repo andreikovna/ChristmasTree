@@ -1,0 +1,38 @@
+.settings-tree-wrapper{
+  width: 100%;
+}
+
+.tree-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  height: 25vh;
+}
+
+.settings-tree{
+  width: 40%;
+  background: rgba(179, 246, 255, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 5px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.tree1 {
+  background-image: url(./assets/tree/1.png);
+}
+
+.tree2 {
+  background-image: url(./assets/tree/2.png);
+}
+
+.tree4 {
+  background-image: url(./assets/tree/4.png);
+}
+
+.tree6 {
+  background-image: url(./assets/tree/6.png);
+}

@@ -14,9 +14,7 @@ class App {
     const mainPageHTML = this.mainPage.render();
     const footer = MainPage.createFooter();
     const header = MainPage.createHeader();
-    this.container.append(header);
-    this.container.append(mainPageHTML);
-    this.container.append(footer);
+    this.container.append(header, mainPageHTML, footer);
   }
 }
 

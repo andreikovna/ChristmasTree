@@ -6,7 +6,6 @@ import { ShapeFilter } from './filters/shapeFilter';
 import { SizeFilter } from './filters/sizeFilter';
 import { FavouriteFilter } from './filters/favouriteFilter';
 import { Button } from './utilities/button';
-import { createPropertySet } from './utilities/createPropertySet';
 
 export class Filter {
   container: HTMLDivElement;
@@ -17,11 +16,25 @@ export class Filter {
   }
 
   createFilter(): HTMLDivElement {
-    const shape = createPropertySet('shape');
-    const size = createPropertySet('size');
-    const color = createPropertySet('color');
+    const shapeArray: string[] = [];
+    data.forEach((element) => {
+      shapeArray.push(element.shape);
+    });
+    const shapeSet = [...new Set(shapeArray)];
 
-    const shapeFilter = new ShapeFilter(shape);
+    const sizeArray: string[] = [];
+    data.forEach((element) => {
+      sizeArray.push(element.size);
+    });
+    const sizeSet = [...new Set(sizeArray)];
+
+    const colorArray: string[] = [];
+    data.forEach((element) => {
+      colorArray.push(element.color);
+    });
+    const colorSet = [...new Set(colorArray)];
+
+    const shapeFilter = new ShapeFilter(shapeSet);
     const containerShape = shapeFilter.createShapeFilter();
 
     const quantityFilter = new QuantityFilter();
@@ -30,10 +43,10 @@ export class Filter {
     const yearFilter = new YearFilter();
     const containerYear = yearFilter.createYearFilter();
 
-    const colorFilter = new ColorFilter(color);
+    const colorFilter = new ColorFilter(colorSet);
     const containerColor = colorFilter.createColorFilter();
 
-    const sizeFilter = new SizeFilter(size);
+    const sizeFilter = new SizeFilter(sizeSet);
     const containerSize = sizeFilter.createSizeFilter();
 
     const favouriteFilter = new FavouriteFilter();
