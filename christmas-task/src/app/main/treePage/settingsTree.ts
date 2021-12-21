@@ -1,4 +1,4 @@
-export class SettingsTreeContainer {
+export class TreeSettingsContainer {
   container: HTMLDivElement;
 
   constructor() {
