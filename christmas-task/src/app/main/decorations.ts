@@ -63,6 +63,7 @@ export class Decorations {
 
     const searchFilter = searchContainer.querySelector('.input-search');
     searchFilter?.addEventListener('keyup', this.selectName);
+    searchFilter?.addEventListener('input', this.selectName);
 
     return searchContainer;
   }
