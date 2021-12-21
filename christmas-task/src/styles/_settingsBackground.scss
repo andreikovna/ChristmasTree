@@ -1,0 +1,54 @@
+.background-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 27vh;
+  margin-bottom: 1rem;
+}
+
+.settings-background {
+  width: 30%;
+  border: 1px solid $dark-green;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  margin: 0.1rem;
+}
+
+.BG1 {
+  background-image: url(./assets/bg/1.jpg);
+}
+
+.BG2 {
+  background-image: url(./assets/bg/2.jpg);
+}
+
+.BG3  {
+   background-image: url(./assets/bg/3.jpg);
+ }
+
+ .BG4 {
+   background-image: url(./assets/bg/4.jpg);
+ }
+
+.BG5 {
+  background-image: url(./assets/bg/5.jpg);
+}
+
+.BG6 {
+  background-image: url(./assets/bg/6.jpg);
+}
+
+.BG7 {
+  background-image: url(./assets/bg/7.jpg);
+}
+
+.BG8 {
+  background-image: url(./assets/bg/8.jpg);
+}
+
+.BG9 {
+  background-image: url(./assets/bg/9.jpg);
+}

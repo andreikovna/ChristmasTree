@@ -1,0 +1,72 @@
+.switcher-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.switcher-status {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.5px;
+  color: white;
+}
+
+.custom-checkbox {
+  width: 48px;
+  height: 24px;
+  margin-left: 1rem;
+  text-align: right;
+  position: relative;
+  & input#status-garland {
+    display: none;
+  }
+  & label {
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: relative;
+
+    & .status-switch {
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-color: grey;
+      color: white;
+      transition: all 0.5s ease;
+      padding: 3px;
+      border-radius: 30px;
+    }
+    &::before {
+      border-radius: 50%;
+      height: 16px;
+      width: 16px;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      justify-content: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    &:before {
+      content: "";
+      background-color: white;
+      color: black;
+      box-shadow: 0 0 4px 4px rgba(#000, 0.2);
+      top: calc(50% - 8px);
+      left: 4px;
+      z-index: 10;
+    }
+  }
+}
+.custom-checkbox {
+  & input#status-garland:checked + label > .status-switch {
+    background-color: #3ddfd1;
+  }
+  & input#status-garland:checked + label::before {
+    color: #3ddfd1;
+    left: calc(50%);
+    transform: scale(1.2);
+  }
+}

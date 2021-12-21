@@ -1,5 +1,5 @@
-import { SettingsContainer } from './treePage/settings';
-import { SettingsTreeContainer } from './treePage/settingsTree';
+import { GameContainer } from './treePage/gameContainer';
+import { SettingsContainer } from './treePage/settingsContainer';
 
 export class TreePage {
   private container: HTMLElement;
@@ -10,24 +10,15 @@ export class TreePage {
   }
 
   static createSettingsTreeContainer() :HTMLDivElement {
-    const div = document.createElement('div');
-    div.classList.add('settings_tree_container');
-    const settingsContainer = new SettingsContainer();
-    const settingsSoundSnow = settingsContainer.createSettingsSoundSnow();
-    const sound = settingsSoundSnow.querySelector('.sound-settings');
-    const snow = settingsSoundSnow.querySelector('.snow-settings');
-
-    const treeSettingsContainer = new SettingsTreeContainer();
-    const settingsTree = treeSettingsContainer.createSettingsTreeContainer();
-
-    div.append(settingsSoundSnow, settingsTree);
-    return div;
+    const div = new SettingsContainer();
+    const settingsContainer = div.createSettingsContainer();
+    return settingsContainer;
   }
 
   static createGameContainer() :HTMLDivElement {
-    const div = document.createElement('div');
-    div.classList.add('game_container');
-    return div;
+    const div = new GameContainer();
+    const gameContainer = div.createGameContainer();
+    return gameContainer;
   }
 
   static createToysAndTreeContainer() :HTMLDivElement {
