@@ -1,3 +1,4 @@
+import { christmasAudio } from './audio';
 import { BackgroundSettings } from './settingsBG';
 import { GarlandSettings } from './settingsGarland';
 import { SettingsSoundSnowContainer } from './settingsSoundSnow';
@@ -14,8 +15,16 @@ export class SettingsContainer {
   createSettingsContainer(): HTMLDivElement {
     const settingsSoundSnowContainer = new SettingsSoundSnowContainer();
     const settingsSoundSnow = settingsSoundSnowContainer.createSettingsSoundSnow();
-    // const sound = settingsSoundSnow.querySelector('.sound-settings');
-    // const snow = settingsSoundSnow.querySelector('.snow-settings');
+    const sound = settingsSoundSnow.querySelector('.sound-settings');
+    sound?.addEventListener('click', () => {
+      if (sound.classList.contains('active')) {
+        sound.classList.remove('active');
+        christmasAudio.audioPlay();
+      } else {
+        sound.classList.add('active');
+        christmasAudio.audioPlay();
+      }
+    });
 
     const treeSettingsContainer = new TreeSettingsContainer();
     const settingsTree = treeSettingsContainer.createSettingsTreeContainer();
