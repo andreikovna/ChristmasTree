@@ -30,13 +30,11 @@
   justify-content: center;
 }
 
-.tree-for-game {
-
-}
-
 .toys_tree_container{
+  grid-column: span 1;
   background: rgba(25, 47, 45, 0.6);
   height: 82vh;
+  padding: 1rem;
 }
 
 

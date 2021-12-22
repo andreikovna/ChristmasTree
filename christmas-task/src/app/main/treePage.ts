@@ -1,3 +1,4 @@
+import { DecorationSlotContainer } from './treePage/decorationSlotContainer';
 import { GameContainer } from './treePage/gameContainer';
 import { SettingsContainer } from './treePage/settingsContainer';
 
@@ -24,6 +25,13 @@ export class TreePage {
   static createToysAndTreeContainer() :HTMLDivElement {
     const div = document.createElement('div');
     div.classList.add('toys_tree_container');
+    div.innerHTML = '<p class="filter_titles">Игрушки</p>';
+
+    const decorationSlotContainer = new DecorationSlotContainer();
+    const chosen = decorationSlotContainer.createChosenDecorationsItem();
+
+    div.append(chosen);
+
     return div;
   }
 

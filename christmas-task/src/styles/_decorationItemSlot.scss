@@ -1,0 +1,41 @@
+.decoration-slot-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.slot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 23%;
+  max-width: 80px;
+  min-height: 80px;
+  background: rgba(179, 246, 255, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 5px;
+  margin: 0.2rem;
+}
+
+.slot-image {
+  position: absolute;
+  height: 55px;
+  width: 55px;
+  object-fit: contain;
+  cursor: move;
+}
+
+.slot-text {
+  z-index: 10;
+  align-self: flex-end;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  margin-left: 60px;
+  border-radius: 5px;
+  background-color: #24c5db;
+  font-size: 1rem;
+}
