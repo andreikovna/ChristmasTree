@@ -13,8 +13,42 @@ export class TreePage {
   static createSettingsTreeContainer() :HTMLDivElement {
     const div = new SettingsContainer();
     const settingsContainer = div.createSettingsContainer();
+    const treeContainer = settingsContainer.querySelector('.tree-wrapper');
+    treeContainer?.addEventListener('click', TreePage.selectTree);
+
+    const backgroundContainer = settingsContainer.querySelector('.background-wrapper');
+    backgroundContainer?.addEventListener('click', TreePage.selectBG);
+
     return settingsContainer;
   }
+
+  static selectTree = (event: Event): void => {
+    const target = event.target as HTMLElement & {
+      dataset: Record<string, string>;
+    };
+    if (target.classList.contains('settings-tree')) {
+      const { treenumber } = target.dataset;
+      const mainTree = document.querySelector('.tree-for-game') as HTMLImageElement;
+      mainTree.src = `./assets/tree/${treenumber}.png`;
+    }
+  };
+
+  static selectBG = (event: Event): void => {
+    const target = event.target as HTMLElement & {
+      dataset: Record<string, string>;
+    };
+    console.log(target);
+    if (target.classList.contains('settings-background')) {
+      const { bg } = target.dataset;
+      const mainBG = document.querySelector('.game_container') as HTMLDivElement;
+      console.log(bg);
+      console.log(mainBG);
+      mainBG.style.background = `url("./assets/bg/${bg}.jpg")`;
+      mainBG.style.backgroundSize = 'cover';
+      mainBG.style.backgroundPosition = 'center';
+      mainBG.style.backgroundRepeat = 'no-repeat';
+    }
+  };
 
   static createGameContainer() :HTMLDivElement {
     const div = new GameContainer();
