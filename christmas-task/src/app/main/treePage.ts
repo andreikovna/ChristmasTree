@@ -37,12 +37,9 @@ export class TreePage {
     const target = event.target as HTMLElement & {
       dataset: Record<string, string>;
     };
-    console.log(target);
     if (target.classList.contains('settings-background')) {
       const { bg } = target.dataset;
       const mainBG = document.querySelector('.game_container') as HTMLDivElement;
-      console.log(bg);
-      console.log(mainBG);
       mainBG.style.background = `url("./assets/bg/${bg}.jpg")`;
       mainBG.style.backgroundSize = 'cover';
       mainBG.style.backgroundPosition = 'center';
