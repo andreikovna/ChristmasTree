@@ -1,6 +1,7 @@
 import { DecorationSlotContainer } from './treePage/decorationSlotContainer';
 import { GameContainer } from './treePage/gameContainer';
 import { SettingsContainer } from './treePage/settingsContainer';
+import { snowflake } from './treePage/snowflake';
 
 export class TreePage {
   private container: HTMLElement;
@@ -19,8 +20,27 @@ export class TreePage {
     const backgroundContainer = settingsContainer.querySelector('.background-wrapper');
     backgroundContainer?.addEventListener('click', TreePage.selectBG);
 
+    const snow = settingsContainer.querySelector('.snow-settings');
+    snow?.addEventListener('click', TreePage.startSnow);
+
     return settingsContainer;
   }
+
+  static startSnow = (event: Event): void => {
+    const target = event.target as HTMLElement;
+    if (target.classList.contains('active')) {
+      const snowflakeContainer = document.querySelector('.snowflake_container') as HTMLDivElement;
+      snowflakeContainer?.parentNode?.removeChild(snowflakeContainer);
+      target.classList.remove('active');
+    } else {
+      const gameContainer = document.querySelector('.game_container');
+      const snowflakeContainer = document.createElement('div');
+      snowflakeContainer.classList.add('snowflake_container');
+      gameContainer?.append(snowflakeContainer);
+      target.classList.add('active');
+      snowflake();
+    }
+  };
 
   static selectTree = (event: Event): void => {
     const target = event.target as HTMLElement & {
