@@ -1,6 +1,6 @@
 import { savings } from '../savings';
 import { IDecorations } from '../interfaces/decorations.interface';
-import { checkFilterData } from '../utilities/checkFiltersStyles';
+import { checkStyles } from '../utilities/checkStyles';
 
 export class ShapeFilter {
   container: HTMLDivElement;
@@ -34,7 +34,7 @@ export class ShapeFilter {
   static createContainersForShape(shape: string): HTMLDivElement {
     const shapeContainer = document.createElement('div');
     shapeContainer.classList.add('shape_container');
-    const activeStyle = checkFilterData(
+    const activeStyle = checkStyles(
       savings.settings.filterShape.includes(shape),
       'active',
     );

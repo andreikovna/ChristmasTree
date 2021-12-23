@@ -1,6 +1,6 @@
 import { savings } from '../savings';
 import { IDecorations } from '../interfaces/decorations.interface';
-import { checkFilterData } from '../utilities/checkFiltersStyles';
+import { checkStyles } from '../utilities/checkStyles';
 
 export class SizeFilter {
   container: HTMLDivElement;
@@ -33,7 +33,7 @@ export class SizeFilter {
 
   static createContainersForSize(size: string): HTMLDivElement {
     const div = document.createElement('div');
-    const activeStyle = checkFilterData(
+    const activeStyle = checkStyles(
       savings.settings.filterSize.includes(size),
       'active',
     );

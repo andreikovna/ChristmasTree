@@ -1,6 +1,6 @@
 import { savings } from '../savings';
 import { IDecorations } from '../interfaces/decorations.interface';
-import { isChecked } from '../utilities/checkFavouriteFilters';
+import { checkStyles } from '../utilities/checkStyles';
 
 export class FavouriteFilter {
   container: HTMLDivElement;
@@ -11,7 +11,7 @@ export class FavouriteFilter {
   }
 
   createFavouriteFilter(): HTMLDivElement {
-    const checked = isChecked(savings.settings.favorite);
+    const checked = checkStyles(savings.settings.favorite, 'checked');
     this.container.innerHTML = `
       <div class="favourite-toys">
         <input type="checkbox" class="favourite" id="favourite-toys" name="favourite-toys" ${checked}/>
