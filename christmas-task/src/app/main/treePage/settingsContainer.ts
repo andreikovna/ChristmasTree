@@ -1,3 +1,4 @@
+import { savingsTree } from '../savingsTree';
 import { christmasAudio } from './audio';
 import { BackgroundSettings } from './settingsBG';
 import { GarlandSettings } from './settingsGarland';
@@ -20,10 +21,13 @@ export class SettingsContainer {
       if (sound.classList.contains('active')) {
         sound.classList.remove('active');
         christmasAudio.audioPlay();
+        savingsTree.settingsTree.isPlay = false;
       } else {
         sound.classList.add('active');
         christmasAudio.audioPlay();
+        savingsTree.settingsTree.isPlay = true;
       }
+      savingsTree.setTreeData();
     });
 
     const treeSettingsContainer = new TreeSettingsContainer();

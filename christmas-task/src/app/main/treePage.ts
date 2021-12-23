@@ -1,5 +1,8 @@
+import { savingsTree } from './savingsTree';
+import { savings } from './savings';
 import { DecorationSlotContainer } from './treePage/decorationSlotContainer';
 import { GameContainer } from './treePage/gameContainer';
+import { Garland } from './treePage/garland';
 import { SettingsContainer } from './treePage/settingsContainer';
 import { snowflake } from './treePage/snowflake';
 
@@ -23,6 +26,9 @@ export class TreePage {
     const snow = settingsContainer.querySelector('.snow-settings');
     snow?.addEventListener('click', TreePage.startSnow);
 
+    const garland = settingsContainer.querySelector('.garland-wrapper');
+    garland?.addEventListener('click', TreePage.selectGarland);
+
     return settingsContainer;
   }
 
@@ -32,14 +38,36 @@ export class TreePage {
       const snowflakeContainer = document.querySelector('.snowflake_container') as HTMLDivElement;
       snowflakeContainer?.parentNode?.removeChild(snowflakeContainer);
       target.classList.remove('active');
+      savingsTree.settingsTree.isSnow = false;
     } else {
       const gameContainer = document.querySelector('.game_container');
       const snowflakeContainer = document.createElement('div');
       snowflakeContainer.classList.add('snowflake_container');
       gameContainer?.append(snowflakeContainer);
       target.classList.add('active');
+      savingsTree.settingsTree.isSnow = true;
       snowflake();
     }
+    savingsTree.setTreeData();
+  };
+
+  static selectGarland = (event: Event): void => {
+    const mainGarlandContainer = document.querySelector('.main-garland-container');
+    const gameContainer = document.querySelector('.game_container') as HTMLDivElement;
+    if (mainGarlandContainer) {
+      mainGarlandContainer?.parentNode?.removeChild(mainGarlandContainer);
+    }
+    const target = event.target as HTMLElement & {
+      dataset: Record<string, string>;
+    };
+    const { garland } = target.dataset;
+    const garlandHTML = Garland.createGarland(`${garland}-garland`);
+    const garlandContainer = document.createElement('div');
+    garlandContainer.classList.add('main-garland-container');
+    garlandContainer.innerHTML = garlandHTML;
+    gameContainer.append(garlandContainer);
+    savingsTree.settingsTree.styleGarland = garland;
+    savingsTree.setTreeData();
   };
 
   static selectTree = (event: Event): void => {
@@ -51,6 +79,7 @@ export class TreePage {
       const mainTree = document.querySelector('.tree-for-game') as HTMLImageElement;
       mainTree.src = `./assets/tree/${treenumber}.png`;
     }
+    savingsTree.setTreeData();
   };
 
   static selectBG = (event: Event): void => {
@@ -65,6 +94,7 @@ export class TreePage {
       mainBG.style.backgroundPosition = 'center';
       mainBG.style.backgroundRepeat = 'no-repeat';
     }
+    savingsTree.setTreeData();
   };
 
   static createGameContainer() :HTMLDivElement {
@@ -89,6 +119,11 @@ export class TreePage {
   render(): HTMLElement {
     const settingsTreeContainer = TreePage.createSettingsTreeContainer();
     const gameContainer = TreePage.createGameContainer();
+    if (savingsTree.settingsTree.isSnow === true) {
+      const snowflakeContainer = document.createElement('div');
+      snowflakeContainer.classList.add('snowflake_container');
+      gameContainer.append(snowflakeContainer);
+    }
     const toysAndTreeContainer = TreePage.createToysAndTreeContainer();
     this.container.append(settingsTreeContainer, gameContainer, toysAndTreeContainer);
     return this.container;

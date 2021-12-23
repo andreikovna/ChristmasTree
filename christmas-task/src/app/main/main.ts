@@ -1,8 +1,10 @@
+import { savingsTree } from './savingsTree';
 import { TreePage } from './treePage';
 import { savings } from './savings';
 import { Decorations } from './decorations';
 import { quantitySlider } from './slider-quantity';
 import { yearSlider } from './slider-year';
+import { snowflake } from './treePage/snowflake';
 
 export class MainPage {
   private container: HTMLElement;
@@ -117,6 +119,7 @@ export class MainPage {
     const footer = MainPage.createFooter();
     const treePage = tree.render();
     document.body.append(header, treePage, footer);
+    snowflake();
   }
 
   render(): HTMLElement {

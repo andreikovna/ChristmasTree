@@ -58,8 +58,8 @@ class Savings {
     this.settings.favorite = favoriteCheck.checked;
     this.settings.sorter = sorter.value;
 
-    localStorage.setItem('settings', JSON.stringify(this.settings));
+    localStorage.setItem('settings1112', JSON.stringify(this.settings));
   }
 }
 
-export const savings = new Savings(JSON.parse(localStorage.getItem('settings') || '{}'));
+export const savings = new Savings(JSON.parse(localStorage.getItem('settings1112') || '{}'));
