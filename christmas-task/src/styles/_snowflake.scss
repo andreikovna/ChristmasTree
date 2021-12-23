@@ -16,7 +16,7 @@
 }
 
 @keyframes fall {
-	to {
-		transform: translateY(105vh);
-	}
+  to {
+    transform: translateY(105vh) rotate(180deg);
+  }
 }
