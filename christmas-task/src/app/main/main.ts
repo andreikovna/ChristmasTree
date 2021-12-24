@@ -1,4 +1,3 @@
-import { savingsTree } from './savingsTree';
 import { TreePage } from './treePage';
 import { savings } from './savings';
 import { Decorations } from './decorations';

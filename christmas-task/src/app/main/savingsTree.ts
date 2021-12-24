@@ -4,6 +4,7 @@ export interface ISavingsTree {
   isSnow: boolean;
   isPlay: boolean;
   styleGarland: string;
+  garlandCheck: boolean;
 }
 class SavingsTree {
   settingsTree: {
@@ -12,6 +13,7 @@ class SavingsTree {
     isSnow: boolean;
     isPlay: boolean;
     styleGarland: string;
+    garlandCheck: boolean;
   };
 
   constructor(localStorageData: ISavingsTree) {
@@ -21,15 +23,18 @@ class SavingsTree {
       isSnow: localStorageData?.isSnow ?? false,
       isPlay: localStorageData?.isPlay ?? false,
       styleGarland: localStorageData?.styleGarland ?? 'hide',
+      garlandCheck: localStorageData?.garlandCheck ?? false,
     };
   }
 
   setTreeData() {
     const background = document.querySelector('.game_container') as HTMLDivElement;
     const mainTree = document.querySelector('.tree-for-game') as HTMLImageElement;
+    const garlandCheck = document.querySelector('.checkbox') as HTMLInputElement;
 
     this.settingsTree.background = background.style.backgroundImage;
     this.settingsTree.mainTree = mainTree.src;
+    this.settingsTree.garlandCheck = garlandCheck.checked;
 
     localStorage.setItem('settingsTree1112', JSON.stringify(this.settingsTree));
   }

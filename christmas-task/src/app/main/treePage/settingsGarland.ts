@@ -1,3 +1,6 @@
+import { savingsTree } from '../savingsTree';
+import { checkStyles } from '../utilities/checkStyles';
+
 export class GarlandSettings {
   container: HTMLDivElement;
 
@@ -7,6 +10,7 @@ export class GarlandSettings {
   }
 
   createGarlandContainer(): HTMLDivElement {
+    const checked = checkStyles(savingsTree.settingsTree.garlandCheck, 'checked');
     this.container.innerHTML = `
       <p class="filter_titles">Гирлянда</p>
       <div class="garland-wrapper">
@@ -19,7 +23,7 @@ export class GarlandSettings {
       <div class="switcher-wrapper">
         <p class="filter_titles">Вкл/Выкл</p>
         <div class="custom-checkbox">
-          <input id="status-garland" class="checkbox" type="checkbox"  name="status-garland">
+          <input id="status-garland" class="checkbox" type="checkbox" name="status-garland" ${checked}>
           <label for="status-garland">
               <div class="status-switch"
                        data-unchecked="Off"

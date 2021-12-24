@@ -1,5 +1,4 @@
 import { savingsTree } from './savingsTree';
-import { savings } from './savings';
 import { DecorationSlotContainer } from './treePage/decorationSlotContainer';
 import { GameContainer } from './treePage/gameContainer';
 import { Garland } from './treePage/garland';
@@ -14,22 +13,76 @@ export class TreePage {
     this.container.classList.add('tree-page');
   }
 
-  static createSettingsTreeContainer() :HTMLDivElement {
+  render(): HTMLElement {
+    const settingsTreeContainer = TreePage.createSettingsTreeContainer();
+    const gameContainer = TreePage.createGameContainer();
+    if (savingsTree.settingsTree.isSnow === true) {
+      const snowflakeContainer = document.createElement('div');
+      snowflakeContainer.classList.add('snowflake_container');
+      gameContainer.append(snowflakeContainer);
+    }
+    const toysAndTreeContainer = TreePage.createToysAndTreeContainer();
+    this.container.append(
+      settingsTreeContainer,
+      gameContainer,
+      toysAndTreeContainer,
+    );
+    return this.container;
+  }
+
+  static createSettingsTreeContainer(): HTMLDivElement {
     const div = new SettingsContainer();
     const settingsContainer = div.createSettingsContainer();
     const treeContainer = settingsContainer.querySelector('.tree-wrapper');
     treeContainer?.addEventListener('click', TreePage.selectTree);
 
     const backgroundContainer = settingsContainer.querySelector('.background-wrapper');
-    backgroundContainer?.addEventListener('click', TreePage.selectBG);
-
-    const snow = settingsContainer.querySelector('.snow-settings');
-    snow?.addEventListener('click', TreePage.startSnow);
-
     const garland = settingsContainer.querySelector('.garland-wrapper');
+    const snow = settingsContainer.querySelector('.snow-settings');
+    const garlandCheck = settingsContainer.querySelector('.checkbox');
+
+    backgroundContainer?.addEventListener('click', TreePage.selectBG);
+    snow?.addEventListener('click', TreePage.startSnow);
     garland?.addEventListener('click', TreePage.selectGarland);
+    garlandCheck?.addEventListener('change', TreePage.toggleGarland);
 
     return settingsContainer;
+  }
+
+  static createGameContainer(): HTMLDivElement {
+    const div = new GameContainer();
+    const gameContainer = div.createGameContainer();
+    return gameContainer;
+  }
+
+  static createToysAndTreeContainer(): HTMLDivElement {
+    const div = document.createElement('div');
+    div.classList.add('toys_tree_container');
+    div.innerHTML = '<p class="filter_titles">Игрушки</p>';
+
+    const decorationSlotContainer = new DecorationSlotContainer();
+    const chosen = decorationSlotContainer.createChosenDecorationsItem();
+
+    div.append(chosen);
+    return div;
+  }
+
+  static toggleGarland(): void {
+    const garlandCheck = document.querySelector('.checkbox') as HTMLInputElement;
+    const mainGarlandContainer = document.querySelector('.main-garland-container');
+    const gameContainer = document.querySelector('.game_container') as HTMLDivElement;
+    mainGarlandContainer?.parentNode?.removeChild(mainGarlandContainer);
+    if (garlandCheck.checked === true) {
+      const garlandHTML = Garland.createGarland('multi-garland');
+      savingsTree.settingsTree.styleGarland = 'multi';
+      const garlandContainer = document.createElement('div');
+      garlandContainer.classList.add('main-garland-container');
+      garlandContainer.innerHTML = garlandHTML;
+      gameContainer.append(garlandContainer);
+    } else {
+      savingsTree.settingsTree.styleGarland = 'hide';
+    }
+    savingsTree.setTreeData();
   }
 
   static startSnow = (event: Event): void => {
@@ -66,6 +119,8 @@ export class TreePage {
     garlandContainer.classList.add('main-garland-container');
     garlandContainer.innerHTML = garlandHTML;
     gameContainer.append(garlandContainer);
+    const garlandCheck = document.querySelector('.checkbox') as HTMLInputElement;
+    garlandCheck.checked = true;
     savingsTree.settingsTree.styleGarland = garland;
     savingsTree.setTreeData();
   };
@@ -96,36 +151,4 @@ export class TreePage {
     }
     savingsTree.setTreeData();
   };
-
-  static createGameContainer() :HTMLDivElement {
-    const div = new GameContainer();
-    const gameContainer = div.createGameContainer();
-    return gameContainer;
-  }
-
-  static createToysAndTreeContainer() :HTMLDivElement {
-    const div = document.createElement('div');
-    div.classList.add('toys_tree_container');
-    div.innerHTML = '<p class="filter_titles">Игрушки</p>';
-
-    const decorationSlotContainer = new DecorationSlotContainer();
-    const chosen = decorationSlotContainer.createChosenDecorationsItem();
-
-    div.append(chosen);
-
-    return div;
-  }
-
-  render(): HTMLElement {
-    const settingsTreeContainer = TreePage.createSettingsTreeContainer();
-    const gameContainer = TreePage.createGameContainer();
-    if (savingsTree.settingsTree.isSnow === true) {
-      const snowflakeContainer = document.createElement('div');
-      snowflakeContainer.classList.add('snowflake_container');
-      gameContainer.append(snowflakeContainer);
-    }
-    const toysAndTreeContainer = TreePage.createToysAndTreeContainer();
-    this.container.append(settingsTreeContainer, gameContainer, toysAndTreeContainer);
-    return this.container;
-  }
 }
