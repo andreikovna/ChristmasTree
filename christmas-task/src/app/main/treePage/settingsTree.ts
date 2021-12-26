@@ -11,9 +11,11 @@ export class TreeSettingsContainer {
       <p class="filter_titles">Выберите ёлку</p>
       <div class="tree-wrapper">
         <div class="settings-tree tree1" data-treeNumber="1"></div>
-        <div class="settings-tree tree4" data-treeNumber="4"></div>
-        <div class="settings-tree tree6" data-treeNumber="6"></div>
         <div class="settings-tree tree2" data-treeNumber="2"></div>
+        <div class="settings-tree tree3" data-treeNumber="3"></div>
+        <div class="settings-tree tree4" data-treeNumber="4"></div>
+        <div class="settings-tree tree5" data-treeNumber="5"></div>
+        <div class="settings-tree tree6" data-treeNumber="6"></div>
       </div>
     `;
     return this.container;

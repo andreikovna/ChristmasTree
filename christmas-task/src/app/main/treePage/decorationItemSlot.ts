@@ -44,50 +44,51 @@ export class DecorationItemSlot {
   }
 
   static drag(event: DragEvent) :void {
-    const target = event.target as HTMLElement;
-    event.dataTransfer.setData('id', target.id);
+    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+    event.dataTransfer?.setData('id', target.id);
     const shiftX = event.clientX - target.getBoundingClientRect().left - 65;
     const shiftY = event.clientY - target.getBoundingClientRect().top - 65;
-    event.dataTransfer.setData('shiftX', shiftX.toString());
-    event.dataTransfer.setData('shiftY', shiftY.toString());
-    event.dataTransfer.setData('dataSet', target.dataset.img);
+    event.dataTransfer?.setData('shiftX', shiftX.toString());
+    event.dataTransfer?.setData('shiftY', shiftY.toString());
+    event.dataTransfer?.setData('dataSet', target.dataset.img);
     document.body.ondrop = DecorationItemSlot.drop;
   }
 
-  static drop(event): void {
-    const game = document.querySelector('.game_container');
+  static drop(event: Event): void {
+    const targetEvent = event as MouseEvent & { dataTransfer: DataTransfer };
+    const itemId = targetEvent.dataTransfer.getData('id');
+    const shiftX = Number(targetEvent.dataTransfer.getData('shiftX'));
+    const shiftY = Number(targetEvent.dataTransfer.getData('shiftY'));
+    const dataSet = targetEvent.dataTransfer.getData('dataSet');
+
+    const game = document.querySelector('.game_container') as HTMLDivElement;
     const areaTree = document.querySelector('.area-tree') as HTMLAreaElement;
 
-    const itemId = event.dataTransfer.getData('id');
-    const shiftX = Number(event.dataTransfer.getData('shiftX'));
-    const shiftY = Number(event.dataTransfer.getData('shiftY'));
-    const dataSet = event.dataTransfer.getData('dataSet');
-
-    const rightItem = game?.getBoundingClientRect().x + game?.getBoundingClientRect().width - event.clientX;
-    const bottomItem = game?.getBoundingClientRect().y + game?.getBoundingClientRect().height - event.clientY;
+    const rightItem = game?.getBoundingClientRect().x + game?.getBoundingClientRect().width - targetEvent.clientX;
+    const bottomItem = game?.getBoundingClientRect().y + game?.getBoundingClientRect().height - targetEvent.clientY;
     const right = rightItem + shiftX;
     const bottom = bottomItem + shiftY;
 
-    const parentForElement = document.getElementById(`slot${dataSet}`);
+    const parentForElement = document.getElementById(`slot${dataSet}`) as HTMLDivElement;
     const quantityToys = parentForElement?.querySelector('.slot-text') as HTMLElement;
     const quantity = Number(quantityToys.textContent);
 
-    const elem = document.getElementById(itemId);
+    const elem = document.getElementById(itemId) as HTMLImageElement;
 
     if (event.target === areaTree) {
-      if (!elem.parentElement.classList.contains('game_container')) {
+      if (!elem.parentElement?.classList.contains('game_container')) {
         quantityToys.textContent = (quantity - 1).toString();
       }
       elem.style.right = `${right}px`;
       elem.style.bottom = `${bottom}px`;
       game.append(elem);
     } else if (event.target !== areaTree) {
-      if (elem.parentElement.classList.contains('game_container')) {
+      if (elem.parentElement?.classList.contains('game_container')) {
         quantityToys.textContent = (quantity + 1).toString();
       }
       elem.style.right = '10px';
       elem.style.bottom = '10px';
-      parentForElement.append(elem);
+      parentForElement?.append(elem);
     }
   }
 }

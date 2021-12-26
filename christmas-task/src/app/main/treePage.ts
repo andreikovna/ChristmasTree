@@ -1,3 +1,4 @@
+import { Button } from './utilities/button';
 import { coords } from './drag-n-drop/coords';
 import { savingsTree } from './savingsTree';
 import { DecorationSlotContainer } from './treePage/decorationSlotContainer';
@@ -23,12 +24,23 @@ export class TreePage {
       gameContainer.append(snowflakeContainer);
     }
     const toysAndTreeContainer = TreePage.createToysAndTreeContainer();
+    const button = new Button();
+    const clearLocalStorageButton = button.createButton('reset_savings', 'Очистить настройки');
+    clearLocalStorageButton.style.position = 'absolute';
+    clearLocalStorageButton.style.right = '1rem';
+    clearLocalStorageButton.style.bottom = '1rem';
+    clearLocalStorageButton.addEventListener('click', TreePage.clearLocalStorage);
+    toysAndTreeContainer.append(clearLocalStorageButton);
     this.container.append(
       settingsTreeContainer,
       gameContainer,
       toysAndTreeContainer,
     );
     return this.container;
+  }
+
+  static clearLocalStorage() :void {
+    localStorage.clear();
   }
 
   static createSettingsTreeContainer(): HTMLDivElement {

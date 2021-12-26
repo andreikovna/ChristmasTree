@@ -19,4 +19,8 @@ export const garlandUL = [
     width: '100',
     height: '570',
   },
+  {
+    width: '100',
+    height: '670',
+  },
 ];

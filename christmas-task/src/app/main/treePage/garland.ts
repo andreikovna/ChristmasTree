@@ -52,7 +52,17 @@ export class Garland {
         `;
       }
     });
-    const row = [row0, row1, row2, row3, row4];
+
+    let row5 = '';
+    garlandCoordinates.forEach((el) => {
+      if (el.row === '6') {
+        row5 += `
+        <li class="${name}" style="transform: rotate(${el.rot1}deg)
+        translate(${el.translate}px) rotate(${el.rot2}deg);"></li>
+        `;
+      }
+    });
+    const row = [row0, row1, row2, row3, row4, row5];
 
     let str = '';
     for (let i = 0; i < garlandUL.length; i++) {
