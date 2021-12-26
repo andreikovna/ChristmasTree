@@ -8,19 +8,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 23%;
-  max-width: 80px;
-  min-height: 80px;
+  width: 85px;
+  height: 85px;
   background: rgba(179, 246, 255, 0.5);
   backdrop-filter: blur(4px);
   border-radius: 5px;
-  margin: 0.2rem;
+  margin: 0.1rem;
 }
 
 .slot-image {
   position: absolute;
-  height: 55px;
-  width: 55px;
+  height: 65px;
+  width: 65px;
   object-fit: contain;
   cursor: grab;
   &:active{

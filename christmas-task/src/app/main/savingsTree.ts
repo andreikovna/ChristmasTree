@@ -5,6 +5,7 @@ export interface ISavingsTree {
   isPlay: boolean;
   styleGarland: string;
   garlandCheck: boolean;
+  mapNumber: number;
 }
 class SavingsTree {
   settingsTree: {
@@ -14,6 +15,7 @@ class SavingsTree {
     isPlay: boolean;
     styleGarland: string;
     garlandCheck: boolean;
+    mapNumber: number;
   };
 
   constructor(localStorageData: ISavingsTree) {
@@ -24,6 +26,7 @@ class SavingsTree {
       isPlay: localStorageData?.isPlay ?? false,
       styleGarland: localStorageData?.styleGarland ?? 'hide',
       garlandCheck: localStorageData?.garlandCheck ?? false,
+      mapNumber: localStorageData?.mapNumber ?? 1,
     };
   }
 

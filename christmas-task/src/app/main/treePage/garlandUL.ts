@@ -1,7 +1,7 @@
 export const garlandUL = [
   {
     width: '100',
-    height: '140',
+    height: '150',
   },
   {
     width: '100',

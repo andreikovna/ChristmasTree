@@ -1,3 +1,4 @@
+import { coords } from './drag-n-drop/coords';
 import { savingsTree } from './savingsTree';
 import { DecorationSlotContainer } from './treePage/decorationSlotContainer';
 import { GameContainer } from './treePage/gameContainer';
@@ -126,13 +127,14 @@ export class TreePage {
   };
 
   static selectTree = (event: Event): void => {
-    const target = event.target as HTMLElement & {
-      dataset: Record<string, string>;
-    };
+    const target = event.target as HTMLElement & { dataset: Record<string, string> };
     if (target.classList.contains('settings-tree')) {
       const { treenumber } = target.dataset;
       const mainTree = document.querySelector('.tree-for-game') as HTMLImageElement;
+      const mapArea = document.querySelector('.area-tree') as HTMLAreaElement;
       mainTree.src = `./assets/tree/${treenumber}.png`;
+      savingsTree.settingsTree.mapNumber = Number(treenumber) - 1;
+      mapArea.coords = coords[Number(treenumber) - 1];
     }
     savingsTree.setTreeData();
   };
