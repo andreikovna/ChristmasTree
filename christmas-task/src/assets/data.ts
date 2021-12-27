@@ -613,3 +613,19 @@ const data: IData[] = [
 ];
 
 export default data;
+
+const years = [];
+data.forEach((element) => {
+ years.push(Number(element.year));
+});
+
+export const minYear = Math.min(...years);
+export const maxYear = Math.max(...years);
+
+const quantity = [];
+data.forEach((element) => {
+  quantity.push(Number(element.count));
+});
+
+export const minQuant = Math.min(...quantity);
+export const maxQuant = Math.max(...quantity);

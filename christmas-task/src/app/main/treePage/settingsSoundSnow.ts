@@ -1,4 +1,4 @@
-import { savingsTree } from '../savingsTree';
+import { savingsTree } from './savingsTree';
 import { checkStyles } from '../utilities/checkStyles';
 
 export class SettingsSoundSnowContainer {

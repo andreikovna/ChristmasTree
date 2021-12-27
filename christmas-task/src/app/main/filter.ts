@@ -15,7 +15,7 @@ export class Filter {
     this.container.classList.add('filter_item_container');
   }
 
-  createFilter(): HTMLDivElement {
+  public createFilter(): HTMLDivElement {
     const shapeArray: string[] = [];
     data.forEach((element) => {
       shapeArray.push(element.shape);

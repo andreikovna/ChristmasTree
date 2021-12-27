@@ -1,11 +1,11 @@
-import { Button } from './utilities/button';
-import { coords } from './drag-n-drop/coords';
+import { Button } from '../utilities/button';
+import { coords } from '../drag-n-drop/coords';
 import { savingsTree } from './savingsTree';
-import { DecorationSlotContainer } from './treePage/decorationSlotContainer';
-import { GameContainer } from './treePage/gameContainer';
-import { Garland } from './treePage/garland';
-import { SettingsContainer } from './treePage/settingsContainer';
-import { snowflake } from './treePage/snowflake';
+import { DecorationSlotContainer } from './decorationSlotContainer';
+import { GameContainer } from './gameContainer';
+import { Garland } from './garland';
+import { SettingsContainer } from './settingsContainer';
+import { snowflake } from './snowflake';
 
 export class TreePage {
   private container: HTMLElement;

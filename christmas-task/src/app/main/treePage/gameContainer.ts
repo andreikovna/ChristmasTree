@@ -1,6 +1,6 @@
 import { coords } from '../drag-n-drop/coords';
 import { Garland } from './garland';
-import { savingsTree } from '../savingsTree';
+import { savingsTree } from './savingsTree';
 
 export class GameContainer {
   container: HTMLDivElement;
@@ -19,7 +19,9 @@ export class GameContainer {
        coords="${coords[savingsTree.settingsTree.mapNumber]}" shape="poly">
     </map>
     `;
-    const garlandHTML = Garland.createGarland(`${savingsTree.settingsTree.styleGarland}-garland`);
+    const garlandHTML = Garland.createGarland(
+      `${savingsTree.settingsTree.styleGarland}-garland`,
+    );
     const garlandContainer = document.createElement('div');
     garlandContainer.classList.add('main-garland-container');
     garlandContainer.innerHTML = garlandHTML;

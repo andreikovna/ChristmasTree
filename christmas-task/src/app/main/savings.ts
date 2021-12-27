@@ -1,3 +1,7 @@
+import {
+  minYear, maxYear, maxQuant, minQuant,
+} from '../../assets/data';
+
 export interface ISavings {
   filterShape: string[];
   filterColor: string[];
@@ -29,17 +33,17 @@ class Savings {
       filterShape: localStorageData?.filterShape ?? [],
       filterColor: localStorageData?.filterColor ?? [],
       filterSize: localStorageData?.filterSize ?? [],
-      minQuantity: localStorageData?.minQuantity ?? 1,
-      maxQuantity: localStorageData?.maxQuantity ?? 12,
-      minYear: localStorageData?.minYear ?? 1940,
-      maxYear: localStorageData?.maxYear ?? 2020,
+      minQuantity: localStorageData?.minQuantity ?? minQuant,
+      maxQuantity: localStorageData?.maxQuantity ?? maxQuant,
+      minYear: localStorageData?.minYear ?? minYear,
+      maxYear: localStorageData?.maxYear ?? maxYear,
       chosenItems: localStorageData?.chosenItems ?? [],
       favorite: localStorageData?.favorite ?? false,
       sorter: localStorageData?.sorter ?? 'Сортировать по..',
     };
   }
 
-  setData(filterShape: string[], filterColor: string[], filterSize: string[], chosenItems: number[]) {
+  public setData(filterShape: string[], filterColor: string[], filterSize: string[], chosenItems: number[]) {
     const inputQuantityMin = document.querySelector('.min-quantity') as HTMLInputElement;
     const inputQuantityMax = document.querySelector('.max-quantity') as HTMLInputElement;
     const inputYearMin = document.querySelector('.min-year') as HTMLInputElement;

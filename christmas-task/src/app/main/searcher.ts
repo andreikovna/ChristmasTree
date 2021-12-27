@@ -9,7 +9,7 @@ export class Searcher {
     this.container.classList.add('search-wrapper');
   }
 
-  createSearcher(): HTMLDivElement {
+  public createSearcher(): HTMLDivElement {
     const number = String(savings.settings.chosenItems.length);
     this.container.innerHTML = `
       <input type="search" class="input-search" autocomplete="off" autofocus placeholder="Поиск">

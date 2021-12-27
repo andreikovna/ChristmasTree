@@ -1,6 +1,7 @@
 .tree-page {
   width: 100%;
-  height: 700px;
+  height: 82vh;
+  min-height: 714px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background-image: url("./assets/background.png");
@@ -17,12 +18,14 @@
   grid-column: span 1;
   padding: 1rem;
   padding-right: 0;
-  height: 700px;
+  height: 82vh;
+  min-height: 714px;
 }
 
 .game_container{
   grid-column: span 2;
-  height:700px;
+  height:82vh;
+  min-height: 714px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -34,9 +37,14 @@
 .toys_tree_container{
   grid-column: span 1;
   background: rgba(25, 47, 45, 0.6);
-  height: 700px;
+  height: 82vh;
+  min-height: 714px;
   padding: 0 0.5rem 0 1rem;
   position: relative;
+}
+
+.tree-for-game {
+  height: 714px;
 }
 
 @media (max-width: 840px){

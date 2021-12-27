@@ -1,4 +1,4 @@
-import { TreePage } from './treePage';
+import { TreePage } from './treePage/treePage';
 import { savings } from './savings';
 import { Decorations } from './decorations';
 import { quantitySlider } from './slider-quantity';
@@ -17,6 +17,15 @@ export class MainPage {
     this.container = document.createElement('div');
     this.container.classList.add('main');
     this.container.id = id;
+  }
+
+  public render(): HTMLElement {
+    const title = MainPage.createTitle(MainPage.TextObject.MainTitle);
+    const button = MainPage.createButtonStart(MainPage.TextObject.buttonText);
+    button.addEventListener('click', MainPage.openDecorations, { once: true });
+    this.container.append(title);
+    this.container.append(button);
+    return this.container;
   }
 
   static createHeader(): HTMLDivElement {
@@ -119,14 +128,5 @@ export class MainPage {
     const treePage = tree.render();
     document.body.append(header, treePage, footer);
     snowflake();
-  }
-
-  render(): HTMLElement {
-    const title = MainPage.createTitle(MainPage.TextObject.MainTitle);
-    const button = MainPage.createButtonStart(MainPage.TextObject.buttonText);
-    button.addEventListener('click', MainPage.openDecorations, { once: true });
-    this.container.append(title);
-    this.container.append(button);
-    return this.container;
   }
 }

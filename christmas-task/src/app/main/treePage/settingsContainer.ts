@@ -1,4 +1,4 @@
-import { savingsTree } from '../savingsTree';
+import { savingsTree } from './savingsTree';
 import { christmasAudio } from './audio';
 import { BackgroundSettings } from './settingsBG';
 import { GarlandSettings } from './settingsGarland';
@@ -39,7 +39,12 @@ export class SettingsContainer {
     const garlandSettingsContainer = new GarlandSettings();
     const garlandSettings = garlandSettingsContainer.createGarlandContainer();
 
-    this.container.append(settingsSoundSnow, settingsTree, backgroundSettings, garlandSettings);
+    this.container.append(
+      settingsSoundSnow,
+      settingsTree,
+      backgroundSettings,
+      garlandSettings,
+    );
     return this.container;
   }
 }

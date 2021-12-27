@@ -7,10 +7,7 @@ export class DecorationItemSlot {
 
   count: string;
 
-  constructor(
-    num: string,
-    count: string,
-  ) {
+  constructor(num: string, count: string) {
     this.num = num;
     this.count = count;
   }
@@ -43,8 +40,10 @@ export class DecorationItemSlot {
     return div;
   }
 
-  static drag(event: DragEvent) :void {
-    const target = event.target as HTMLElement & { dataset: Record<string, string> };
+  static drag(event: DragEvent): void {
+    const target = event.target as HTMLElement & {
+      dataset: Record<string, string>;
+    };
     event.dataTransfer?.setData('id', target.id);
     const shiftX = event.clientX - target.getBoundingClientRect().left - 65;
     const shiftY = event.clientY - target.getBoundingClientRect().top - 65;
@@ -64,13 +63,21 @@ export class DecorationItemSlot {
     const game = document.querySelector('.game_container') as HTMLDivElement;
     const areaTree = document.querySelector('.area-tree') as HTMLAreaElement;
 
-    const rightItem = game?.getBoundingClientRect().x + game?.getBoundingClientRect().width - targetEvent.clientX;
-    const bottomItem = game?.getBoundingClientRect().y + game?.getBoundingClientRect().height - targetEvent.clientY;
+    const rightItem = game?.getBoundingClientRect().x
+      + game?.getBoundingClientRect().width
+      - targetEvent.clientX;
+    const bottomItem = game?.getBoundingClientRect().y
+      + game?.getBoundingClientRect().height
+      - targetEvent.clientY;
     const right = rightItem + shiftX;
     const bottom = bottomItem + shiftY;
 
-    const parentForElement = document.getElementById(`slot${dataSet}`) as HTMLDivElement;
-    const quantityToys = parentForElement?.querySelector('.slot-text') as HTMLElement;
+    const parentForElement = document.getElementById(
+      `slot${dataSet}`,
+    ) as HTMLDivElement;
+    const quantityToys = parentForElement?.querySelector(
+      '.slot-text',
+    ) as HTMLElement;
     const quantity = Number(quantityToys.textContent);
 
     const elem = document.getElementById(itemId) as HTMLImageElement;

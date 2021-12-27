@@ -1,4 +1,5 @@
 import noUiSlider, { target } from 'nouislider';
+import { maxQuant, minQuant } from '../../assets/data';
 import { savings } from './savings';
 
 export function quantitySlider(): void {
@@ -9,8 +10,8 @@ export function quantitySlider(): void {
     connect: true,
     step: 1,
     range: {
-      min: [1],
-      max: [12],
+      min: [minQuant],
+      max: [maxQuant],
     },
   });
 
@@ -28,7 +29,7 @@ export function quantitySlider(): void {
   );
 
   function resetFilters() :void {
-    slider.set([1, 12]);
+    slider.set([minQuant, maxQuant]);
   }
 
   const resetButton = document.querySelector('.reset_button');

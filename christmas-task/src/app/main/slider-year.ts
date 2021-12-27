@@ -1,4 +1,5 @@
 import noUiSlider from 'nouislider';
+import { maxYear, minYear } from '../../assets/data';
 import { savings } from './savings';
 
 export function yearSlider() :void {
@@ -9,8 +10,8 @@ export function yearSlider() :void {
     connect: true,
     step: 1,
     range: {
-      min: [1940],
-      max: [2020],
+      min: [minYear],
+      max: [maxYear],
     },
   });
 
@@ -25,7 +26,7 @@ export function yearSlider() :void {
   });
 
   function resetFilters() :void {
-    slider.set([1940, 2020]);
+    slider.set([minYear, maxYear]);
   }
 
   const resetButton = document.querySelector('.reset_button');

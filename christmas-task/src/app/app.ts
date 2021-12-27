@@ -1,6 +1,6 @@
 import { christmasAudio } from './main/treePage/audio';
 import { MainPage } from './main/main';
-import { savingsTree } from './main/savingsTree';
+import { savingsTree } from './main/treePage/savingsTree';
 
 class App {
   private container: HTMLElement;
@@ -12,7 +12,7 @@ class App {
     this.mainPage = new MainPage('main-page');
   }
 
-  init() :void {
+  public init() :void {
     const mainPageHTML = this.mainPage.render();
     const footer = MainPage.createFooter();
     const header = MainPage.createHeader();

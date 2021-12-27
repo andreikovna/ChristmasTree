@@ -35,7 +35,7 @@ export class ChristmasDecorationItem {
     this.favorite = favorite;
   }
 
-  createElement(chosenItems: number[]): HTMLDivElement {
+  public createElement(chosenItems: number[]): HTMLDivElement {
     const div = document.createElement('div');
     div.classList.add('toy-container');
     div.setAttribute('data-number', this.num);

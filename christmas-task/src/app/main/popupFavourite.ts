@@ -6,7 +6,7 @@ export class PopupFavourite {
     this.container.classList.add('popup');
   }
 
-  render(): HTMLElement {
+  public render(): HTMLElement {
     this.container.innerHTML = `
     <div class="popup-body">
         <div class="popup-content">

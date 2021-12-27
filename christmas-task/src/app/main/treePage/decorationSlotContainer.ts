@@ -9,7 +9,7 @@ export class DecorationSlotContainer {
 
   chosenDecorations: number[];
 
-  chosenItemsForSlots: IDecorationSlot [];
+  chosenItemsForSlots: IDecorationSlot[];
 
   constructor() {
     this.container = document.createElement('div');
@@ -19,9 +19,12 @@ export class DecorationSlotContainer {
     this.chosenItemsForSlots = [];
   }
 
-  createChosenDecorationsItem() :HTMLDivElement {
+  createChosenDecorationsItem(): HTMLDivElement {
     data.forEach((el) => {
-      if (this.chosenDecorations.length === 0 && this.chosenItemsForSlots.length < this.max) {
+      if (
+        this.chosenDecorations.length === 0
+        && this.chosenItemsForSlots.length < this.max
+      ) {
         const slotItem = new DecorationItemSlot(el.num, el.count);
         this.chosenItemsForSlots.push(slotItem);
         this.container.append(slotItem.createDecorationItemSlot());

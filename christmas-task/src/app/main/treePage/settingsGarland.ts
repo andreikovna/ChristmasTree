@@ -1,4 +1,4 @@
-import { savingsTree } from '../savingsTree';
+import { savingsTree } from './savingsTree';
 import { checkStyles } from '../utilities/checkStyles';
 
 export class GarlandSettings {
@@ -10,7 +10,10 @@ export class GarlandSettings {
   }
 
   createGarlandContainer(): HTMLDivElement {
-    const checked = checkStyles(savingsTree.settingsTree.garlandCheck, 'checked');
+    const checked = checkStyles(
+      savingsTree.settingsTree.garlandCheck,
+      'checked',
+    );
     this.container.innerHTML = `
       <p class="filter_titles">Гирлянда</p>
       <div class="garland-wrapper">
