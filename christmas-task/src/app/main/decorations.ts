@@ -114,15 +114,7 @@ export class Decorations {
     const sorterInput = document.querySelector(
       '.sorter_input',
     ) as HTMLSelectElement;
-    if (sorterInput.value === 'ASC') {
-      this.allDecorations = Sorter.sortASC(this.allDecorations);
-    } else if (sorterInput.value === 'DESC') {
-      this.allDecorations = Sorter.sortDESC(this.allDecorations);
-    } else if (sorterInput.value === 'sortYearUp') {
-      this.allDecorations = Sorter.sortYearUp(this.allDecorations);
-    } else if (sorterInput.value === 'sortYearDown') {
-      this.allDecorations = Sorter.sortYearDown(this.allDecorations);
-    }
+    this.allDecorations = Sorter.sortItems(this.allDecorations, sorterInput.value);
     this.filterDecorationsItem();
   };
 

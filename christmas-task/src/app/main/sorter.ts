@@ -26,52 +26,19 @@ export class Sorter {
     return sorterContainer;
   }
 
-  static sortASC(items: IDecorations[]) :IDecorations[] {
+  static sortItems(items: IDecorations[], sortBy: string) :IDecorations[] {
     const sortedItems = items.sort((a, b) => {
-      if (a.name > b.name) {
-        return 1;
+      if (sortBy === 'ASC') {
+        return a.name > b.name ? 1 : -1;
       }
-      if (a.name < b.name) {
-        return -1;
+      if (sortBy === 'DESC') {
+        return a.name < b.name ? 1 : -1;
       }
-      return 0;
-    });
-    return sortedItems;
-  }
-
-  static sortDESC(items: IDecorations[]) :IDecorations[] {
-    const sortedItems = items.sort((a, b) => {
-      if (a.name < b.name) {
-        return 1;
+      if (sortBy === 'sortYearUp') {
+        return Number(a.year) > Number(b.year) ? 1 : -1;
       }
-      if (a.name > b.name) {
-        return -1;
-      }
-      return 0;
-    });
-    return sortedItems;
-  }
-
-  static sortYearUp(items: IDecorations[]) :IDecorations[] {
-    const sortedItems = items.sort((a, b) => {
-      if (Number(a.year) > Number(b.year)) {
-        return 1;
-      }
-      if (Number(a.year) < Number(b.year)) {
-        return -1;
-      }
-      return 0;
-    });
-    return sortedItems;
-  }
-
-  static sortYearDown(items: IDecorations[]) :IDecorations[] {
-    const sortedItems = items.sort((a, b) => {
-      if (Number(a.year) < Number(b.year)) {
-        return 1;
-      }
-      if (Number(a.year) > Number(b.year)) {
-        return -1;
+      if (sortBy === 'sortYearDown') {
+        return Number(a.year) < Number(b.year) ? 1 : -1;
       }
       return 0;
     });
