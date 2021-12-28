@@ -12,9 +12,7 @@ export function snowflake(): void {
 
     snowflakeContainer?.appendChild(snowFlake);
 
-    setTimeout(() => {
-      snowFlake.remove();
-    }, 5000);
+    setTimeout(snowFlake.remove, 5000);
   }
 
   setInterval(createSnowFlake, 50);
