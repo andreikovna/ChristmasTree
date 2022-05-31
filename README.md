@@ -1,10 +1,4 @@
-# andreikovna-JSFE2021Q3
-Private repository for @andreikovna
+# ChristmasTreeTask
+Task for RS School course. An application that allows you to sort christmas toys by different parameters, find a toy by name, group toys by type, add toys to favorites and remove from it, with an interactive page where you can decorate the Christmas tree with the selected christmas toys. 
 
-Проект Museum - https://rolling-scopes-school.github.io/andreikovna-JSFE2021Q3/museum-dom
-
-Проект Momentum - https://andreikovna-momentum.netlify.app/ 
-
-Проект Art Quiz - https://rolling-scopes-school.github.io/andreikovna-JSFE2021Q3/art-quiz
-
-Видеорезюме - https://youtu.be/9J9n9rK8t7s
+deploy https://rolling-scopes-school.github.io/andreikovna-JSFE2021Q3/christmas-task
